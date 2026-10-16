@@ -410,7 +410,7 @@ function ChatPreview(handle: Handle<{ scenario: Scenario }>) {
                 <MessageContent>
                   <Trace>
                     <Reasoning
-                      key={scenario}
+                      key={`reasoning-${scenario}`}
                       status={scenario === "thinking" ? "thinking" : "complete"}
                       duration={5}
                       defaultOpen={scenario === "thinking"}
@@ -419,7 +419,7 @@ function ChatPreview(handle: Handle<{ scenario: Scenario }>) {
                     </Reasoning>
                     {scenario !== "thinking" ? (
                       <Tool
-                        key={scenario}
+                        key={`tool-${scenario}`}
                         name="Search the project"
                         status={scenario === "error" ? "error" : "success"}
                         defaultOpen={scenario === "error"}
