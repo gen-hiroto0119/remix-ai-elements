@@ -8,7 +8,7 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
 }
 
 const server = http.createServer(createRequestListener(router.fetch));
-server.listen(port, "0.0.0.0", () => {
+server.listen(port, () => {
   console.log(`Playground listening on port ${port}`);
 });
 

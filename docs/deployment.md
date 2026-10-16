@@ -23,8 +23,10 @@ visual-only Playground.
   pnpm start
   ```
 
-The start script sets `NODE_ENV=production`. The server listens on
-`0.0.0.0` using the `PORT` supplied by Cloud, with a local default of `3000`.
+The start script sets `NODE_ENV=production`. The server uses the `PORT`
+supplied by Cloud, with a local default of `3000`, and leaves the listen host
+unset so Node accepts IPv6 and IPv4 connections where dual-stack is available.
+Cloud's startup probes connect over IPv6; do not bind to IPv4-only `0.0.0.0`.
 Configure startup, readiness, and liveness checks to use `/health`.
 
 In this mode the Playground keeps its `workspace:*` dependency on
