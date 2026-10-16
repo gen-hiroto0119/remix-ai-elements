@@ -17,7 +17,9 @@ export type IconName =
   | "alert"
   | "clock"
   | "message"
-  | "file";
+  | "file"
+  | "folder"
+  | "circle";
 const paths: Record<IconName, string> = {
   "arrow-up": "M12 19V5m-6 6 6-6 6 6",
   "arrow-down": "M12 5v14m-6-6 6 6 6-6",
@@ -36,6 +38,8 @@ const paths: Record<IconName, string> = {
   clock: "M12 6v6l4 2",
   message: "M4 3h16v14H9l-5 4Z",
   file: "M5 2h9l5 5v15H5Zm9 0v6h5M8 12h8m-8 4h6",
+  folder: "M3 5h7l2 3h9v12H3Z",
+  circle: "M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0",
 };
 
 export function Icon(handle: Handle<{ name: IconName; size?: number }>) {

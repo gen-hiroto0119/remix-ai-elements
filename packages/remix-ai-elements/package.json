@@ -8,6 +8,70 @@
     "README.md"
   ],
   "exports": {
+    "./chain-of-thought": {
+      "types": "./dist/chain-of-thought.d.ts",
+      "import": "./dist/chain-of-thought.js"
+    },
+    "./checkpoint": {
+      "types": "./dist/checkpoint.d.ts",
+      "import": "./dist/checkpoint.js"
+    },
+    "./confirmation": {
+      "types": "./dist/confirmation.d.ts",
+      "import": "./dist/confirmation.js"
+    },
+    "./context": {
+      "types": "./dist/context.d.ts",
+      "import": "./dist/context.js"
+    },
+    "./file-tree": {
+      "types": "./dist/file-tree.d.ts",
+      "import": "./dist/file-tree.js"
+    },
+    "./inline-citation": {
+      "types": "./dist/inline-citation.d.ts",
+      "import": "./dist/inline-citation.js"
+    },
+    "./model-selector": {
+      "types": "./dist/model-selector.d.ts",
+      "import": "./dist/model-selector.js"
+    },
+    "./plan": {
+      "types": "./dist/plan.d.ts",
+      "import": "./dist/plan.js"
+    },
+    "./queue": {
+      "types": "./dist/queue.d.ts",
+      "import": "./dist/queue.js"
+    },
+    "./sources": {
+      "types": "./dist/sources.d.ts",
+      "import": "./dist/sources.js"
+    },
+    "./stack-trace": {
+      "types": "./dist/stack-trace.d.ts",
+      "import": "./dist/stack-trace.js"
+    },
+    "./subagent": {
+      "types": "./dist/subagent.d.ts",
+      "import": "./dist/subagent.js"
+    },
+    "./suggestion": {
+      "types": "./dist/suggestion.d.ts",
+      "import": "./dist/suggestion.js"
+    },
+    "./task": {
+      "types": "./dist/task.d.ts",
+      "import": "./dist/task.js"
+    },
+    "./terminal": {
+      "types": "./dist/terminal.d.ts",
+      "import": "./dist/terminal.js"
+    },
+    "./test-results": {
+      "types": "./dist/test-results.d.ts",
+      "import": "./dist/test-results.js"
+    },
     "./message": {
       "types": "./dist/message.d.ts",
       "import": "./dist/message.js"

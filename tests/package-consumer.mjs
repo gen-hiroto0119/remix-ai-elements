@@ -40,7 +40,7 @@ import { Message, MessageContent } from 'remix-ai-elements/message';
 import { Markdown } from 'remix-ai-elements/markdown';
 const html = await renderToString(createElement(Message, {}, createElement(MessageContent, {}, createElement(Markdown, { content: '**Packed consumer**' }))));
 assert.ok(html.includes('<strong>Packed consumer</strong>'));
-for (const name of ['message-scroller', 'prompt-input', 'trace', 'reasoning', 'tool', 'code-block', 'theme']) await import('remix-ai-elements/' + name);
+for (const name of ['message-scroller', 'prompt-input', 'trace', 'reasoning', 'tool', 'code-block', 'theme', 'chain-of-thought', 'checkpoint', 'confirmation', 'context', 'file-tree', 'inline-citation', 'model-selector', 'plan', 'queue', 'sources', 'stack-trace', 'subagent', 'suggestion', 'task', 'terminal', 'test-results']) await import('remix-ai-elements/' + name);
 for (const name of ['react', 'react-dom', 'tailwindcss', 'ai', '@ai-sdk/react']) {
   assert.throws(() => import.meta.resolve(name), { code: 'ERR_MODULE_NOT_FOUND' });
 }
@@ -53,7 +53,30 @@ execFileSync(process.execPath, ["consumer.mjs"], {
 });
 writeFileSync(
   join(consumer, "consumer.mts"),
-  `import { Message, type MessageProps } from 'remix-ai-elements/message';\nimport { CodeBlock, type CodeBlockProps } from 'remix-ai-elements/code-block';\nconst message: MessageProps = { from: 'user', children: 'Hello' };\nconst code: CodeBlockProps = { code: 'const a = 1;', lineNumbers: true };\nexport { Message, CodeBlock, message, code };\n`,
+  `import { Message, type MessageProps } from 'remix-ai-elements/message';\nimport { CodeBlock, type CodeBlockProps } from 'remix-ai-elements/code-block';\nconst message: MessageProps = { from: 'user', children: 'Hello' };\nconst code: CodeBlockProps = { code: 'const a = 1;', lineNumbers: true };\nexport { Message, CodeBlock, message, code };\n` +
+    [
+      "chain-of-thought",
+      "checkpoint",
+      "confirmation",
+      "context",
+      "file-tree",
+      "inline-citation",
+      "model-selector",
+      "plan",
+      "queue",
+      "sources",
+      "stack-trace",
+      "subagent",
+      "suggestion",
+      "task",
+      "terminal",
+      "test-results",
+    ]
+      .map(
+        (name, index) =>
+          `import * as component${index} from 'remix-ai-elements/${name}'; export { component${index} };`,
+      )
+      .join("\n"),
 );
 execFileSync(
   process.execPath,

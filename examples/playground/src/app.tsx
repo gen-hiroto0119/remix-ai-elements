@@ -45,21 +45,29 @@ import {
   question,
   reasoning,
 } from "../../shared/fixtures.js";
+import {
+  CatalogPreview,
+  catalogDescriptions,
+  Introduction,
+  isCatalogPage,
+  officialPatterns,
+  officialUrl,
+} from "./catalog.js";
 
 const items = [
-  "Chat",
-  "Message",
-  "Prompt input",
+  "Introduction",
+  ...officialPatterns,
   "Message scroller",
   "Trace",
-  "Reasoning",
-  "Tool",
   "Markdown",
   "Code block",
 ] as const;
 type Page = (typeof items)[number];
 type Scenario = "complete" | "empty" | "thinking" | "error";
 const descriptions: Record<Page, string> = {
+  ...catalogDescriptions,
+  Introduction:
+    "The complete AI Elements pattern catalog, with Remix-native building blocks.",
   Chat: "A conversation, composed from small Remix-native components.",
   Message: "A flexible layout for messages, content, avatars, and actions.",
   "Prompt input":
@@ -161,8 +169,14 @@ const nav = css({
   display: "flex",
   flexDirection: "column",
   gap: "4px",
+  maxHeight: "calc(100dvh - 180px)",
+  overflowY: "auto",
+  position: "sticky",
+  top: "20px",
   "@media (max-width: 760px)": {
     flexDirection: "row",
+    position: "static",
+    maxHeight: "none",
     overflowX: "auto",
     padding: "2px 0 6px",
   },
@@ -503,6 +517,10 @@ function Example(handle: Handle<{ label: string; children?: RemixNode }>) {
 
 function ComponentPreview(handle: Handle<{ page: Page }>) {
   return () => {
+    if (isCatalogPage(handle.props.page))
+      return (
+        <CatalogPreview key={handle.props.page} page={handle.props.page} />
+      );
     switch (handle.props.page) {
       case "Message":
         return (
@@ -731,7 +749,7 @@ function ComponentPreview(handle: Handle<{ page: Page }>) {
 }
 
 export function App(handle: Handle) {
-  let page: Page = "Chat";
+  let page: Page = "Introduction";
   let dark = false;
   let scenario: Scenario = "complete";
   return () => (
@@ -773,6 +791,16 @@ export function App(handle: Handle) {
                 mix={[
                   navButton,
                   on("click", () => {
+                    if (isCatalogPage(page) || page === "Introduction") {
+                      window.open(
+                        page === "Introduction"
+                          ? "https://ui.shadcn.com/docs/ai-elements"
+                          : officialUrl(page),
+                        "_blank",
+                        "noopener,noreferrer",
+                      );
+                      return;
+                    }
                     page = item;
                     void handle.update();
                   }),
@@ -839,7 +867,14 @@ export function App(handle: Handle) {
             </div>
           </div>
           <div mix={preview}>
-            {page === "Chat" ? (
+            {page === "Introduction" ? (
+              <Introduction
+                navigate={(next) => {
+                  page = next;
+                  void handle.update();
+                }}
+              />
+            ) : page === "Chat" ? (
               <ChatPreview scenario={scenario} />
             ) : (
               <ComponentPreview key={page} page={page} />

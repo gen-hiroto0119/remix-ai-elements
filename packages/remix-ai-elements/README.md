@@ -1,5 +1,27 @@
 # remix-ai-elements
 
+## Full visual catalog
+
+The [coverage table](../../docs/visual-coverage.md) maps all 21 official AI Elements patterns to this package. In addition to the original building blocks, individual entrypoints expose:
+
+`chain-of-thought`, `checkpoint`, `confirmation`, `context`, `file-tree`, `inline-citation`, `model-selector`, `plan`, `queue`, `sources`, `stack-trace`, `subagent`, `suggestion`, `task`, `terminal`, and `test-results`.
+
+```tsx
+import { Plan } from "remix-ai-elements/plan";
+import { Confirmation } from "remix-ai-elements/confirmation";
+import { Context } from "remix-ai-elements/context";
+
+<Plan title="Add settings" steps={[
+  { id: "tokens", title: "Define tokens", status: "success" },
+  { id: "ui", title: "Build controls", status: "running" },
+]} />;
+<Confirmation title="Run the command?" state="pending"
+  onDecision={(approved) => console.log(approved)} />;
+<Context input={8420} output={1260} reasoning={980} limit={128000} />;
+```
+
+Callbacks belong to the consuming application; these components do not execute commands or call AI services. `ModelSelector` and `FileTree` support `value`/`defaultValue` and a change callback (`onValueChange` and `onSelect`, respectively). Popovers use the native HTML Popover API with viewport-constrained positioning; use a modern browser. All styles remain self-contained Remix `css()` mixins.
+
 Remix 3の表示部品。現在は見た目を確認する初期版です。APIは未安定・npm未公開です。
 
 ```tsx
