@@ -4,7 +4,7 @@ import { renderToString } from "remix/component/server";
 import {
   CatalogPreview,
   catalogDescriptions,
-} from "../examples/playground/src/catalog.js";
+} from "../examples/playground/app/ui/public/catalog.tsx";
 import { Context } from "../packages/remix-ai-elements/src/context.js";
 import { sourceUrl } from "../packages/remix-ai-elements/src/internal/source.js";
 import { Sources } from "../packages/remix-ai-elements/src/sources.js";

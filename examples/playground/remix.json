@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/remix/schema/remix.json",
+  "assets": {
+    "rootDir": ".",
+    "basePath": "/assets",
+    "mounts": {
+      "app": "app",
+      "npm": "../../node_modules",
+      "shared": "../shared",
+      "elements": "../../packages/remix-ai-elements/dist"
+    },
+    "allowFiles": ["app/**/public/**", "../shared/fixtures.ts"],
+    "allowPackages": ["remix", "remix-ai-elements"],
+    "denyFiles": ["**/*.test.*"]
+  }
+}

@@ -3,9 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "PORT=5173 NODE_ENV=development node --watch --import remix/node-tsx server.ts",
+    "start": "NODE_ENV=production node --import remix/node-tsx server.ts",
+    "build": "remix assets",
+    "test": "NODE_ENV=test remix test",
     "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "engines": {
+    "node": ">=24.3.0"
   },
   "dependencies": {
     "remix": "3.0.0",

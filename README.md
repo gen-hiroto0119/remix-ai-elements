@@ -9,19 +9,22 @@ shadcn AI Elementsを参考にした、Remix v3ネイティブのnpmコンポー
 
 ## ローカルで見る
 
-Node.js 24と、`packageManager`に指定したpnpmを使います。
+Node.js 24.3.0以上と、`packageManager`に指定したpnpm 11.21.0を使います。
 
 ```sh
 pnpm install --frozen-lockfile
-pnpm dev            # Remix playground: http://localhost:5173
-pnpm dev:reference  # 別ターミナルでshadcn参照画面: http://localhost:5174
+pnpm dev               # packageをビルドしてRemix playgroundを起動: http://localhost:5173
+pnpm dev:reference     # 別ターミナルでshadcn参照画面を起動: http://localhost:5174
+pnpm test:playground   # Remixのcontroller/SSRテスト
+pnpm build:playground  # packageとplaygroundのアセットをビルド
+pnpm start             # productionモードで起動
 ```
 
-Playgroundで各部品、ライト／ダーク、会話のCompleted・Empty・Thinking・Error表示を切り替えられます。送信・停止・添付ボタンは表示確認用として無効化しています。入力・折りたたみ・コピー・末尾へのスクロールはブラウザー上で操作できます。
+PlaygroundはRemixサーバーがHTMLをSSRし、ブラウザーで同じRemixコンポーネントをハイドレーションします。Playgroundで各部品、ライト／ダーク、会話のCompleted・Empty・Thinking・Error表示を切り替えられます。送信・停止・添付ボタンは表示確認用として無効化しています。入力・折りたたみ・コピー・末尾へのスクロールはブラウザー上で操作できます。
 
-Introductionから公式一覧の21パターンへ移動できます。追加した16項目には、確認／復元のローカル状態、モデル選択、引用・Contextのポップアップ、ファイル選択、処理経過の表示例を含みます。参照ボタンは、既存の比較対象ではローカルのReact参照画面、追加項目では対応する公式ページを開きます。
+Introductionから公式一覧の21パターンへ移動できます。追加した16項目には、確認／復元のローカル状態、モデル選択、引用・Contextのポップアップ、ファイル選択、処理経過の表示例を含みます。開発中は既存の比較対象でローカルのReact参照画面、追加項目とIntroductionでは対応する公式ページを開きます。productionでは公式ページを開きます。
 
-**AI接続・実際の送信・ストリーミング・自動スクロール追従は未実装です。** 状態は固定データの表示例であり、実処理の成功・失敗を示しません。PlaygroundはブラウザーでマウントするViteアプリです。部品のSSRはテスト対象ですが、アプリのSSR／ハイドレーション経路は今回の範囲外です。
+**AI接続・実際の送信・AIストリーミング・自動スクロール追従は未実装です。** 状態は固定データの表示例であり、実処理の成功・失敗を示しません。PlaygroundのアセットはRemixのサーバーからオンデマンドで配信されます。
 
 ## 構成
 
@@ -30,6 +33,7 @@ Introductionから公式一覧の21パターンへ移動できます。追加し
 - `examples/shadcn-reference` — 公式Base Rhea部品を保存した非公開React参照アプリ。取得元・スナップショットhash・ライセンスを記録しています。
 - `examples/shared/fixtures.ts` — 両画面で使うサンプル会話。
 - `.agents/skills/remix` — `remix@3.0.0`に対応する公式Skillを原文のまま収録。
+- [Laravel Cloudへのデプロイ手順](docs/deployment.md) — 未デプロイのPlayground向け設定例。
 
 新しい公式AI ElementsのBase版パターンを参照しています。旧AI ElementsのReactコードやSDK接続をそのままRemixへ持ち込む構成ではありません。
 

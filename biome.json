@@ -33,7 +33,7 @@
     {
       "includes": [
         "packages/remix-ai-elements/src/**/*.tsx",
-        "examples/playground/src/**/*.tsx",
+        "examples/playground/app/ui/public/**/*.tsx",
         "tests/**/*.tsx"
       ],
       "linter": {
@@ -58,8 +58,8 @@
     },
     {
       "includes": [
-        "examples/playground/src/app.tsx",
-        "examples/playground/src/components/playground-shell.tsx"
+        "examples/playground/app/ui/public/app.tsx",
+        "examples/playground/app/ui/public/components/playground-shell.tsx"
       ],
       "linter": {
         "rules": {

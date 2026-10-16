@@ -33,7 +33,7 @@ The 21 patterns below match the official navigation supplied in the task. Introd
 - Context and citations support hover, click, and keyboard activation. Model selection uses provider-grouped native radios, rather than a React dropdown menu; arrow-key selection stays open until Escape or dismissal.
 - File Tree uses nested disclosure lists and file buttons, not an ARIA tree widget with custom roving focus. Stack Trace displays raw frames; it does not invent editor links or source maps.
 - Checkpoint and Confirmation expose callbacks; they never restore files or run commands. Suggestions populate a preview composer without sending. Terminal, Subagent, Plan, Queue, and Test Results accept fixed data; there is no process, agent, or test runner behind them.
-- No AI SDK transport, streaming, authentication, npm publication, or merge is included. Library SSR is checked, but the Vite playground is client-mounted, not an SSR/hydration demo.
+- No AI SDK transport, streaming, authentication, npm publication, or merge is included. The Remix playground server-renders its fixed visual examples and hydrates them in the browser; it does not demonstrate AI execution.
 - The isolated React reference app still covers the original Chat subset. The added patterns link to their official documentation, rather than pretending the React Chat page is a comparison for every pattern.
 
 ## Public data shapes

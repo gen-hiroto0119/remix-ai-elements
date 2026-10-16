@@ -9,8 +9,14 @@
     "lint": "biome check .",
     "test": "TSX_TSCONFIG_PATH=tests/tsconfig.json node --import tsx --test tests/*.test.tsx",
     "test:consumer": "node tests/package-consumer.mjs",
-    "dev": "pnpm --filter playground dev",
+    "dev": "pnpm --filter remix-ai-elements build && pnpm --filter playground dev",
+    "start": "pnpm --filter playground start",
+    "build:playground": "pnpm --filter remix-ai-elements build && pnpm --filter playground build",
+    "test:playground": "pnpm --filter playground test",
     "dev:reference": "pnpm --filter shadcn-reference dev"
+  },
+  "engines": {
+    "node": ">=24.3.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.2",
