@@ -34,6 +34,7 @@ import {
   TraceTitle,
 } from "remix-ai-elements/trace";
 import { Icon } from "../../../packages/remix-ai-elements/src/internal/icon.js";
+import { scrollbarStyle } from "../../../packages/remix-ai-elements/src/internal/parts.js";
 import {
   answer,
   code,
@@ -763,7 +764,7 @@ export function App(handle: Handle) {
       <div mix={layout}>
         <aside mix={sidebar}>
           <p mix={navLabel}>Playground</p>
-          <nav aria-label="Components" mix={nav}>
+          <nav aria-label="Components" mix={[nav, scrollbarStyle]}>
             {items.map((item) => (
               <button
                 key={item}
