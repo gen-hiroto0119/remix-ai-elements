@@ -1,6 +1,6 @@
 import { css, type Handle, on, type RemixNode } from "remix/component";
+import { focusRing } from "remix-ai-elements/primitives";
 import { tokens as t } from "remix-ai-elements/theme";
-import { focusRing } from "../../../../../../packages/remix-ai-elements/dist/internal/parts.js";
 import { type CatalogState, catalogStates } from "./catalog-data.tsx";
 
 const column = css({

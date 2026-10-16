@@ -12,11 +12,11 @@ import {
   MessageScrollerButton,
   MessageScrollerContent,
 } from "remix-ai-elements/message-scroller";
+import { Icon } from "remix-ai-elements/primitives";
 import { Reasoning } from "remix-ai-elements/reasoning";
 import { tokens as t } from "remix-ai-elements/theme";
 import { Tool } from "remix-ai-elements/tool";
 import { Trace } from "remix-ai-elements/trace";
-import { Icon } from "../../../../../../packages/remix-ai-elements/dist/internal/icon.js";
 import {
   answer,
   command,

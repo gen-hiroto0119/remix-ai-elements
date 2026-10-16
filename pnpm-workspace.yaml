@@ -2,6 +2,11 @@ packages:
   - packages/*
   - examples/*
 
+injectWorkspacePackages: true
+dedupeInjectedDeps: false
+syncInjectedDepsAfterScripts:
+  - build
+
 onlyBuiltDependencies:
   - esbuild
 allowBuilds:

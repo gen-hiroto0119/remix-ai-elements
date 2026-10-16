@@ -1,6 +1,6 @@
 import { css, type Handle, on, type RemixNode } from "remix/component";
+import { Icon } from "remix-ai-elements/primitives";
 import { darkTheme, lightTheme, tokens as t } from "remix-ai-elements/theme";
-import { Icon } from "../../../../../../packages/remix-ai-elements/dist/internal/icon.js";
 
 const shell = css({
   minHeight: "100dvh",

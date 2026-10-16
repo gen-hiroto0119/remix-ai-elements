@@ -33,9 +33,24 @@ Introductionから公式一覧の21パターンへ移動できます。追加し
 - `examples/shadcn-reference` — 公式Base Rhea部品を保存した非公開React参照アプリ。取得元・スナップショットhash・ライセンスを記録しています。
 - `examples/shared/fixtures.ts` — 両画面で使うサンプル会話。
 - `.agents/skills/remix` — `remix@3.0.0`に対応する公式Skillを原文のまま収録。
-- [Laravel Cloudへのデプロイ手順](docs/deployment.md) — 未デプロイのPlayground向け設定例。
+- [Laravel Cloudへのデプロイ手順](docs/deployment.md) — モノレポ運用と将来のRelease tarball運用の設定。
 
 新しい公式AI ElementsのBase版パターンを参照しています。旧AI ElementsのReactコードやSDK接続をそのままRemixへ持ち込む構成ではありません。
+
+## パッケージ境界
+
+非公開のReact比較画面とテストだけが、ルート`tsconfig.json`の
+`remix-ai-elements/*`ソースエイリアスを使います。このエイリアスは本番の
+Playgroundや利用者向けのインポート手順ではありません。Playgroundの
+`tsconfig.json`は`paths`を空にし、公開パッケージexports
+（`remix-ai-elements/message`や`/primitives`など）だけを解決します。
+
+ワークスペース開発では、Playgroundの`workspace:*`依存をpnpmのinjected
+dependencyとして仮想ストアへコピーします。`injectWorkspacePackages: true`と
+`dependenciesMeta.injected`で注入し、`dedupeInjectedDeps: false`で独立コピーを
+保ち、`syncInjectedDepsAfterScripts: [build]`でパッケージbuild後に同期します。
+Remixのasset serverはリポジトリの`dist/internal`を直接mountせず、インストール
+済みの公開パッケージを解決します。
 
 ## 検証
 
@@ -47,4 +62,20 @@ pnpm build
 pnpm test:consumer
 ```
 
-`test:consumer`はビルド後のtarballを独立した一時ディレクトリにインストールし、公開exports・型宣言・SSR・React／Tailwind／AI SDK依存の不在を確認します。npmレジストリへのアクセスが必要です。公開操作は行いません。
+`test:consumer`はビルド後のローカルtarballを独立した検証ディレクトリに
+インストールし、公開exports・`/primitives`の型／SSR・React／Tailwind／AI SDK
+依存の不在、Playgroundの型とasset graph、非公開assetの拒否を確認します。
+既定ではOSの一時ディレクトリを使いますが、検証コピーは自動削除しません。
+`CONSUMER_OUTPUT_DIR`で保存先の親ディレクトリを指定できます。実際のimmutable
+GitHub Release tarballを検証するときだけ、追加のローカルパスまたはHTTPS URLを
+引数に渡します。
+
+```sh
+pnpm test:consumer
+pnpm test:consumer /path/to/immutable-release-tarball.tgz
+CONSUMER_OUTPUT_DIR=/path/to/retained-dir pnpm test:consumer
+```
+
+このリポジトリはnpm公開やGitHub Release作成を行っておらず、上記のRelease
+モードは実在するtarballが用意された後の検証手順です。現在の変更ブランチを
+本番で稼働中だとは扱いません。

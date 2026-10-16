@@ -20,6 +20,24 @@ import { Context } from "remix-ai-elements/context";
 <Context input={8420} output={1260} reasoning={980} limit={128000} />;
 ```
 
+Shared visual primitives are available from the public `/primitives` entrypoint:
+
+```tsx
+import {
+  ActionButton,
+  Icon,
+  type IconName,
+} from "remix-ai-elements/primitives";
+
+const iconName: IconName = "check";
+
+<ActionButton><Icon name={iconName} /></ActionButton>;
+```
+
+`/primitives` exports `Icon`, the `IconName` type, `ActionButton`, `focusRing`,
+and `scrollbarStyle`. Internal implementation modules are not public package
+entrypoints.
+
 Callbacks belong to the consuming application; these components do not execute commands or call AI services. `ModelSelector` and `FileTree` support `value`/`defaultValue` and a change callback (`onValueChange` and `onSelect`, respectively). Popovers use the native HTML Popover API with viewport-constrained positioning; use a modern browser. All styles remain self-contained Remix `css()` mixins.
 
 Remix 3の表示部品。現在は見た目を確認する初期版です。APIは未安定・npm未公開です。
@@ -56,6 +74,7 @@ export function Conversation() {
 | `/markdown` | Markdown |
 | `/code-block` | CodeBlock, CodeBlockCopyButton |
 | `/theme` | lightTheme, darkTheme, tokens |
+| `/primitives` | Icon, IconName (type), ActionButton, focusRing, scrollbarStyle |
 
 部品は対応するDOM属性と`mix`を受け取り、内部スタイルの後で利用者のmixinを合成します。`TraceDisclosure`は`defaultOpen`で初期状態を指定し、制御する場合は`open`と`onOpenChange`を組み合わせます。`Reasoning`の`duration`は秒です。`Tool`は文字列の`input`・`output`を表示し、`pending | running | success | error`を受け取ります。JSONなら利用側で`JSON.stringify`してください。
 

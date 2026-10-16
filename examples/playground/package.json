@@ -12,6 +12,11 @@
   "engines": {
     "node": ">=24.3.0"
   },
+  "dependenciesMeta": {
+    "remix-ai-elements": {
+      "injected": true
+    }
+  },
   "dependencies": {
     "remix": "3.0.0",
     "remix-ai-elements": "workspace:*"

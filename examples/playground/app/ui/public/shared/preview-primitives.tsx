@@ -1,4 +1,5 @@
 import { css, type Handle, type RemixNode } from "remix/component";
+import { Icon } from "remix-ai-elements/primitives";
 import {
   PromptInput,
   PromptInputAction,
@@ -9,7 +10,6 @@ import {
   type PromptStatus,
 } from "remix-ai-elements/prompt-input";
 import { tokens as t } from "remix-ai-elements/theme";
-import { Icon } from "../../../../../../packages/remix-ai-elements/dist/internal/icon.js";
 import { previewStyles } from "./preview-styles.ts";
 
 export function Example(
