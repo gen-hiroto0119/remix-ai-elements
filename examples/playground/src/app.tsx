@@ -799,7 +799,6 @@ export function App(handle: Handle) {
                   State{" "}
                   <select
                     aria-label="Conversation state"
-                    value={scenario}
                     mix={[
                       quietButton,
                       on("change", (event) => {
@@ -808,10 +807,18 @@ export function App(handle: Handle) {
                       }),
                     ]}
                   >
-                    <option value="complete">Completed</option>
-                    <option value="empty">Empty</option>
-                    <option value="thinking">Thinking</option>
-                    <option value="error">Error</option>
+                    <option value="complete" selected={scenario === "complete"}>
+                      Completed
+                    </option>
+                    <option value="empty" selected={scenario === "empty"}>
+                      Empty
+                    </option>
+                    <option value="thinking" selected={scenario === "thinking"}>
+                      Thinking
+                    </option>
+                    <option value="error" selected={scenario === "error"}>
+                      Error
+                    </option>
                   </select>
                 </label>
               ) : null}
