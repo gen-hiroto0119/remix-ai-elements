@@ -16,7 +16,7 @@ export interface TestSuite {
 }
 export interface TestResultsProps {
   suites: readonly TestSuite[];
-  status?: "running" | "complete";
+  status?: "pending" | "running" | "complete";
   command?: string;
 }
 function counts(tests: readonly TestResult[]) {
@@ -35,10 +35,20 @@ export function TestResults(handle: Handle<TestResultsProps>) {
       <Activity
         key={status}
         title={
-          status === "running" ? `Running ${command}` : `Ran ${total.label}`
+          status === "pending"
+            ? "No test results yet"
+            : status === "running"
+              ? `Running ${command}`
+              : `Ran ${total.label}`
         }
         status={
-          status === "running" ? "running" : total.failed ? "error" : "success"
+          status === "pending"
+            ? "pending"
+            : status === "running"
+              ? "running"
+              : total.failed
+                ? "error"
+                : "success"
         }
         defaultOpen={total.failed > 0}
       >

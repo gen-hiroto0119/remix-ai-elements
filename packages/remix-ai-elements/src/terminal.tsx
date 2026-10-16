@@ -13,11 +13,13 @@ export function Terminal(handle: Handle<TerminalProps>) {
       output,
       exitCode,
       status = exitCode !== undefined && exitCode !== 0 ? "error" : "success",
-      title = status === "running"
-        ? `Running ${command}`
-        : status === "error"
-          ? `${command} failed${exitCode !== undefined ? ` (exit ${exitCode})` : ""}`
-          : `Ran ${command}`,
+      title = status === "pending"
+        ? `Not started: ${command}`
+        : status === "running"
+          ? `Running ${command}`
+          : status === "error"
+            ? `${command} failed${exitCode !== undefined ? ` (exit ${exitCode})` : ""}`
+            : `Ran ${command}`,
       ...props
     } = handle.props;
     return (

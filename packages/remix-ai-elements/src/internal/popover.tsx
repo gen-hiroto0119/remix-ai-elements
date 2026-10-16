@@ -58,6 +58,7 @@ export function PreviewPopover(handle: Handle<PreviewPopoverProps>) {
           String(panel.matches(":popover-open")),
         );
         let timer: ReturnType<typeof setTimeout> | undefined;
+        let openedByHover = false;
         const clear = () => {
           clearTimeout(timer);
         };
@@ -77,6 +78,7 @@ export function PreviewPopover(handle: Handle<PreviewPopoverProps>) {
             const open = panel.matches(":popover-open");
             button.setAttribute("aria-expanded", String(open));
             if (open) place();
+            else openedByHover = false;
           },
           { signal },
         );
@@ -88,6 +90,7 @@ export function PreviewPopover(handle: Handle<PreviewPopoverProps>) {
             !panel.matches(":popover-open")
           ) {
             panel.showPopover();
+            openedByHover = true;
             place();
           }
         };
@@ -99,6 +102,15 @@ export function PreviewPopover(handle: Handle<PreviewPopoverProps>) {
         };
         root.addEventListener("pointerenter", enter, { signal });
         root.addEventListener("pointerleave", leave, { signal });
+        button.addEventListener(
+          "click",
+          (event) => {
+            if (openedByHover && panel.matches(":popover-open"))
+              event.preventDefault();
+            openedByHover = false;
+          },
+          { signal },
+        );
         root.addEventListener(
           "focusout",
           (event) => {

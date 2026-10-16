@@ -1,6 +1,6 @@
 import { css, type Handle, on } from "remix/component";
 import { Icon } from "./internal/icon.js";
-import { ActionButton, focusRing } from "./internal/parts.js";
+import { focusRing } from "./internal/parts.js";
 import { tokens as t } from "./theme.js";
 export type FileNode =
   | { type: "file"; name: string; path: string }
@@ -26,7 +26,10 @@ const row = css({
   width: "100%",
   minWidth: 0,
   padding: "6px 8px",
+  border: 0,
+  background: "transparent",
   color: t.foreground,
+  font: "inherit",
   fontSize: "13px",
   overflowWrap: "anywhere",
   textAlign: "left",
@@ -85,13 +88,14 @@ function FileTreeNode(
             </ul>
           </details>
         ) : (
-          <ActionButton
+          <button
+            type="button"
             aria-current={selected === node.path ? "true" : undefined}
-            mix={[row, on("click", () => select(node.path))]}
+            mix={[row, focusRing, on("click", () => select(node.path))]}
           >
             <Icon name="file" />
             <span>{node.name}</span>
-          </ActionButton>
+          </button>
         )}
       </li>
     );

@@ -45,12 +45,22 @@ export function Activity(handle: Handle<ActivityProps>) {
       <TraceDisclosure
         {...props}
         title={
-          <TraceLine status={status} mix={css({ flexWrap: "wrap" })}>
+          <TraceLine status={status}>
             <StatusIcon status={status} />
-            <TraceTitle>{title}</TraceTitle>
-            {description ? (
-              <TraceDescription>{description}</TraceDescription>
-            ) : null}
+            <span
+              mix={css({
+                minWidth: 0,
+                display: "flex",
+                alignItems: "baseline",
+                flexWrap: "wrap",
+                gap: "4px 8px",
+              })}
+            >
+              <TraceTitle>{title}</TraceTitle>
+              {description ? (
+                <TraceDescription>{description}</TraceDescription>
+              ) : null}
+            </span>
           </TraceLine>
         }
       />

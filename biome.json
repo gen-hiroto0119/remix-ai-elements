@@ -57,7 +57,10 @@
       }
     },
     {
-      "includes": ["examples/playground/src/app.tsx"],
+      "includes": [
+        "examples/playground/src/app.tsx",
+        "examples/playground/src/components/playground-shell.tsx"
+      ],
       "linter": {
         "rules": {
           "a11y": {

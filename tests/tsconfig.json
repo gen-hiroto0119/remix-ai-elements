@@ -3,7 +3,7 @@
   "compilerOptions": { "jsxImportSource": "remix/component" },
   "include": [
     "*.test.tsx",
-    "../examples/playground/src/catalog.tsx",
+    "../examples/playground/src/**/*.tsx",
     "../packages/remix-ai-elements/src/**/*.tsx"
   ]
 }

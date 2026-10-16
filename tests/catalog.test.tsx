@@ -8,6 +8,7 @@ import {
 import { Context } from "../packages/remix-ai-elements/src/context.js";
 import { sourceUrl } from "../packages/remix-ai-elements/src/internal/source.js";
 import { Sources } from "../packages/remix-ai-elements/src/sources.js";
+import { Terminal } from "../packages/remix-ai-elements/src/terminal.js";
 import { TestResults } from "../packages/remix-ai-elements/src/test-results.js";
 
 test("all sixteen additional patterns SSR without browser globals", async () => {
@@ -68,4 +69,16 @@ test("test results count nested failures and preserve escaped diagnostics", asyn
   assert.match(html, /3 tests, 1 failed, 1 skipped/);
   assert.match(html, /Expected &lt;button&gt;/);
   assert.match(html, /<details[^>]*open/);
+});
+test("pending execution does not report a completed command or test run", async () => {
+  const terminal = await renderToString(
+    <Terminal command="pnpm build" output="No output yet." status="pending" />,
+  );
+  assert.match(terminal, /Not started: pnpm build/);
+  assert.doesNotMatch(terminal, /Ran pnpm build/);
+  const results = await renderToString(
+    <TestResults suites={[]} status="pending" />,
+  );
+  assert.match(results, /No test results yet/);
+  assert.doesNotMatch(results, /Ran 0 tests/);
 });
