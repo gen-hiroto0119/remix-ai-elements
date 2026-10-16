@@ -40,6 +40,7 @@ export function SuggestionPreview(handle: Handle) {
           value={prompt}
           mix={on("input", (event) => {
             prompt = event.currentTarget.value;
+            update();
           })}
         />
         <PromptInputToolbar>
