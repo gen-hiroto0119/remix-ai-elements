@@ -1,0 +1,125 @@
+{
+  "name": "remix-ai-elements",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "LICENSES",
+    "README.md"
+  ],
+  "exports": {
+    "./chain-of-thought": {
+      "types": "./dist/chain-of-thought.d.ts",
+      "import": "./dist/chain-of-thought.js"
+    },
+    "./checkpoint": {
+      "types": "./dist/checkpoint.d.ts",
+      "import": "./dist/checkpoint.js"
+    },
+    "./confirmation": {
+      "types": "./dist/confirmation.d.ts",
+      "import": "./dist/confirmation.js"
+    },
+    "./context": {
+      "types": "./dist/context.d.ts",
+      "import": "./dist/context.js"
+    },
+    "./file-tree": {
+      "types": "./dist/file-tree.d.ts",
+      "import": "./dist/file-tree.js"
+    },
+    "./inline-citation": {
+      "types": "./dist/inline-citation.d.ts",
+      "import": "./dist/inline-citation.js"
+    },
+    "./model-selector": {
+      "types": "./dist/model-selector.d.ts",
+      "import": "./dist/model-selector.js"
+    },
+    "./plan": {
+      "types": "./dist/plan.d.ts",
+      "import": "./dist/plan.js"
+    },
+    "./queue": {
+      "types": "./dist/queue.d.ts",
+      "import": "./dist/queue.js"
+    },
+    "./sources": {
+      "types": "./dist/sources.d.ts",
+      "import": "./dist/sources.js"
+    },
+    "./stack-trace": {
+      "types": "./dist/stack-trace.d.ts",
+      "import": "./dist/stack-trace.js"
+    },
+    "./subagent": {
+      "types": "./dist/subagent.d.ts",
+      "import": "./dist/subagent.js"
+    },
+    "./suggestion": {
+      "types": "./dist/suggestion.d.ts",
+      "import": "./dist/suggestion.js"
+    },
+    "./task": {
+      "types": "./dist/task.d.ts",
+      "import": "./dist/task.js"
+    },
+    "./terminal": {
+      "types": "./dist/terminal.d.ts",
+      "import": "./dist/terminal.js"
+    },
+    "./test-results": {
+      "types": "./dist/test-results.d.ts",
+      "import": "./dist/test-results.js"
+    },
+    "./message": {
+      "types": "./dist/message.d.ts",
+      "import": "./dist/message.js"
+    },
+    "./message-scroller": {
+      "types": "./dist/message-scroller.d.ts",
+      "import": "./dist/message-scroller.js"
+    },
+    "./prompt-input": {
+      "types": "./dist/prompt-input.d.ts",
+      "import": "./dist/prompt-input.js"
+    },
+    "./trace": {
+      "types": "./dist/trace.d.ts",
+      "import": "./dist/trace.js"
+    },
+    "./reasoning": {
+      "types": "./dist/reasoning.d.ts",
+      "import": "./dist/reasoning.js"
+    },
+    "./tool": {
+      "types": "./dist/tool.d.ts",
+      "import": "./dist/tool.js"
+    },
+    "./markdown": {
+      "types": "./dist/markdown.d.ts",
+      "import": "./dist/markdown.js"
+    },
+    "./code-block": {
+      "types": "./dist/code-block.d.ts",
+      "import": "./dist/code-block.js"
+    },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "marked": "16.3.0"
+  },
+  "peerDependencies": {
+    "remix": "^3.0.0"
+  },
+  "devDependencies": {
+    "remix": "3.0.0"
+  }
+}

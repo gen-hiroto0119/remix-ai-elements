@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsxImportSource": "remix/component",
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "*.test.tsx",
+    "../examples/playground/app/ui/public/**/*.tsx",
+    "../packages/remix-ai-elements/src/**/*.tsx"
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "upstream": {
+    "repository": "https://github.com/shadcn-ui/ui",
+    "commit": "c2477f311c19982ef6e246085438e6cfec3e35ea",
+    "note": "The commit reference applies to the raw upstream files below. Base Rhea registry JSON is fetched from a generated endpoint at retrieval time; its response hash identifies the captured snapshot and is not asserted to be a blob at this commit."
+  },
+  "registrySnapshot": {
+    "endpointTemplate": "https://ui.shadcn.com/r/styles/base-rhea/{name}.json",
+    "retrievedAtUtc": "2026-10-16T05:21:28.940621+00:00",
+    "items": [
+      {
+        "name": "message",
+        "url": "https://ui.shadcn.com/r/styles/base-rhea/message.json",
+        "rawSha256": "727b8837899726217a1309ce132929f95e818a8f4761a6e9047931890dacc990",
+        "registryDependencies": [],
+        "files": [
+          {
+            "upstreamPath": "registry/base-rhea/ui/message.tsx",
+            "vendoredPath": "examples/shadcn-reference/src/components/ui/message.tsx"
+          }
+        ]
+      },
+      {
+        "name": "bubble",
+        "url": "https://ui.shadcn.com/r/styles/base-rhea/bubble.json",
+        "rawSha256": "16c63aa28bf8f6ae4a61dc485b644ec25e8f91ca176fd045d1e2665ca8504857",
+        "registryDependencies": [],
+        "files": [
+          {
+            "upstreamPath": "registry/base-rhea/ui/bubble.tsx",
+            "vendoredPath": "examples/shadcn-reference/src/components/ui/bubble.tsx"
+          }
+        ]
+      },
+      {
+        "name": "trace",
+        "url": "https://ui.shadcn.com/r/styles/base-rhea/trace.json",
+        "rawSha256": "2bcc391ed529f7b4ea3e6c883263074f19d76e0494d62d7cb24012f55bdaaa42",
+        "registryDependencies": ["collapsible"],
+        "files": [
+          {
+            "upstreamPath": "registry/base-rhea/ui/trace.tsx",
+            "vendoredPath": "examples/shadcn-reference/src/components/ui/trace.tsx"
+          }
+        ]
+      },
+      {
+        "name": "code-block",
+        "url": "https://ui.shadcn.com/r/styles/base-rhea/code-block.json",
+        "rawSha256": "e670f049ae7f4d4e6c8718fc02ccdb682dd398e1d1fb30b51223b099c81ee3d4",
+        "registryDependencies": ["button", "use-highlighted-code"],
+        "files": [
+          {
+            "upstreamPath": "registry/base-rhea/ui/code-block.tsx",
+            "vendoredPath": "examples/shadcn-reference/src/components/ui/code-block.tsx"
+          }
+        ]
+      },
+      {
+        "name": "input-group",
+        "url": "https://ui.shadcn.com/r/styles/base-rhea/input-group.json",
+        "rawSha256": "5c74eb091e15c644c5203afaf9cf0cfcb7533456143f3a5bdc9363056c19a71b",
+        "registryDependencies": ["button", "input", "textarea"],
+        "files": [
+          {
+            "upstreamPath": "registry/base-rhea/ui/input-group.tsx",
+            "vendoredPath": "examples/shadcn-reference/src/components/ui/input-group.tsx"
+          }
+        ]
+      },
+      {
+        "name": "button",
+        "url": "https://ui.shadcn.com/r/styles/base-rhea/button.json",
+        "rawSha256": "96c7c8da6fb5642666bdf0a6a9e3b084bae190ba5418c8e2080a55e17d78f2ea",
+        "registryDependencies": [],
+        "files": [
+          {
+            "upstreamPath": "registry/base-rhea/ui/button.tsx",
+            "vendoredPath": "examples/shadcn-reference/src/components/ui/button.tsx"
+          }
+        ]
+      },
+      {
+        "name": "collapsible",
+        "url": "https://ui.shadcn.com/r/styles/base-rhea/collapsible.json",
+        "rawSha256": "d3cd0880af8dbc4774602ef113dbc151fa0dbcc7ec8e34463401ab444a0935d1",
+        "registryDependencies": [],
+        "files": [
+          {
+            "upstreamPath": "registry/base-rhea/ui/collapsible.tsx",
+            "vendoredPath": "examples/shadcn-reference/src/components/ui/collapsible.tsx"
+          }
+        ]
+      },
+      {
+        "name": "use-highlighted-code",
+        "url": "https://ui.shadcn.com/r/styles/base-rhea/use-highlighted-code.json",
+        "rawSha256": "f76e8effbbe93d17a91284a79d64a0dc42aa64c8b65c476dbf74cb895889b0b0",
+        "registryDependencies": [],
+        "files": [
+          {
+            "upstreamPath": "registry/base-rhea/hooks/use-highlighted-code.ts",
+            "vendoredPath": "examples/shadcn-reference/src/hooks/use-highlighted-code.ts"
+          },
+          {
+            "upstreamPath": "registry/base-rhea/lib/highlighter.tsx",
+            "vendoredPath": "examples/shadcn-reference/src/lib/highlighter.tsx"
+          }
+        ]
+      },
+      {
+        "name": "input",
+        "url": "https://ui.shadcn.com/r/styles/base-rhea/input.json",
+        "rawSha256": "6791d3a863a4590c9e6e1e10b51006a1f2a11c858240c69c06119bfed25137c3",
+        "registryDependencies": [],
+        "files": [
+          {
+            "upstreamPath": "registry/base-rhea/ui/input.tsx",
+            "vendoredPath": "examples/shadcn-reference/src/components/ui/input.tsx"
+          }
+        ]
+      },
+      {
+        "name": "textarea",
+        "url": "https://ui.shadcn.com/r/styles/base-rhea/textarea.json",
+        "rawSha256": "443a5e40cb2f70598de4807fc0fe472ed3d25bec5269a0d676897a79f82ab214",
+        "registryDependencies": [],
+        "files": [
+          {
+            "upstreamPath": "registry/base-rhea/ui/textarea.tsx",
+            "vendoredPath": "examples/shadcn-reference/src/components/ui/textarea.tsx"
+          }
+        ]
+      }
+    ]
+  },
+  "researchSnapshots": [
+    {
+      "url": "https://raw.githubusercontent.com/shadcn-ui/ui/c2477f311c19982ef6e246085438e6cfec3e35ea/apps/v4/examples/base/chat-demo.tsx",
+      "rawSha256": "bdc642bbfbd84931cfafad58cb89bdc52da2739fb052e3c7117a8314c6f3c531"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/shadcn-ui/ui/c2477f311c19982ef6e246085438e6cfec3e35ea/apps/v4/examples/base/reasoning-demo.tsx",
+      "rawSha256": "c68b73410708076ac4fbf1d9388dda3801b7b696cf266c835156a54e69c10a48"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/shadcn-ui/ui/c2477f311c19982ef6e246085438e6cfec3e35ea/apps/v4/examples/base/tool-basic.tsx",
+      "rawSha256": "146e4c62a378c994bd5df21f5dd80424eb814b274edd40717b53b9f69e0b5b67"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/shadcn-ui/ui/c2477f311c19982ef6e246085438e6cfec3e35ea/apps/v4/examples/base/prompt-input-demo.tsx",
+      "rawSha256": "278e0ced381b4241370c14d08ee467c893f64fccfcb82b31f3abe1865519b88e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/shadcn-ui/ui/c2477f311c19982ef6e246085438e6cfec3e35ea/apps/v4/registry/styles/style-rhea.css",
+      "rawSha256": "bac4eff75a0e21d9dd90ce40634937f54730471d8f7fa50ca67b317892cf908f"
+    }
+  ],
+  "license": {
+    "name": "MIT",
+    "filePath": "examples/shadcn-reference/LICENSES/shadcn-ui-MIT.txt",
+    "url": "https://raw.githubusercontent.com/shadcn-ui/ui/c2477f311c19982ef6e246085438e6cfec3e35ea/LICENSE.md",
+    "rawSha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f"
+  },
+  "importRewrites": [
+    "cn imports target the local clsx + tailwind-merge utility.",
+    "Registry aliases target the local components, hooks, and lib directories.",
+    "Trace and code-block icon placeholders use the corresponding lucide-react icons."
+  ]
+}
