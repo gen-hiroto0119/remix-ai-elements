@@ -13,6 +13,7 @@ describe("playground controller", () => {
     assert.match(html, /Suggestion/);
     assert.match(html, /type="importmap"/);
     assert.match(html, /type="module"/);
+    assert.match(html, /rel="icon"[^>]+href="data:image\/svg\+xml,/);
   });
 
   it("serves health checks and rejects private or missing modules", async () => {
