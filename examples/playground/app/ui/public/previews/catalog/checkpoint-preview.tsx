@@ -1,6 +1,6 @@
 import { type Handle, on } from "remix/component";
 import { Checkpoint } from "remix-ai-elements/checkpoint";
-import { ActionButton } from "../../../../../../../packages/remix-ai-elements/dist/internal/parts.js";
+import { ActionButton } from "remix-ai-elements/primitives";
 
 export function CheckpointPreview(handle: Handle) {
   let restored = false;

@@ -3,6 +3,7 @@ lockfileVersion: '9.0'
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
+  injectWorkspacePackages: true
 
 importers:
 
@@ -34,7 +35,10 @@ importers:
         version: 3.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
       remix-ai-elements:
         specifier: workspace:*
-        version: link:../../packages/remix-ai-elements
+        version: file:packages/remix-ai-elements(remix@3.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2))
+    dependenciesMeta:
+      remix-ai-elements:
+        injected: true
 
   examples/shadcn-reference:
     dependencies:
@@ -1845,6 +1849,11 @@ packages:
   regex@6.1.0:
     resolution: {integrity: sha512-6VwtthbV4o/7+OaAF9I5L5V3llLEsoPyq9P1JVXkedTP33c7MfCG0/5NOPcSJn0TzXcG9YUrR0gQSWioew3LDg==}
 
+  remix-ai-elements@file:packages/remix-ai-elements:
+    resolution: {directory: packages/remix-ai-elements, type: directory}
+    peerDependencies:
+      remix: ^3.0.0
+
   remix@3.0.0:
     resolution: {integrity: sha512-AzBfVmq8tqEO+hcBYIGpMzyaA0P5QwQygehzARTOB/TFIkoGrTPRlXUJFblQEtWHwrPvRBmGcOfY3F6/snDZ3w==}
     engines: {node: '>=24.3.0'}
@@ -3462,6 +3471,11 @@ snapshots:
   regex@6.1.0:
     dependencies:
       regex-utilities: 2.3.0
+
+  remix-ai-elements@file:packages/remix-ai-elements(remix@3.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)):
+    dependencies:
+      marked: 16.3.0
+      remix: 3.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
 
   remix@3.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2):
     dependencies:

@@ -1,10 +1,14 @@
 # Laravel Cloud deployment
 
-The Remix playground can run as a generic Node.js application from the repository root. This is a deployment recipe only; the app has not been deployed.
+The current Cloud policy is a monorepo deployment from the repository root.
+This branch's package-boundary changes are not claimed to be live. No database,
+cache, AI credentials, or other application secrets are needed for the
+visual-only Playground.
 
-## Application settings
+## Current monorepo mode
 
-- **Repository root:** the monorepo root, so workspace dependencies and the built component package remain available.
+- **Repository root:** the monorepo root, so pnpm workspaces and the built
+  component package remain available.
 - **Application type:** generic Node.js application.
 - **Node.js:** 24.3.0 or later.
 - **Build command:**
@@ -19,11 +23,49 @@ The Remix playground can run as a generic Node.js application from the repositor
   pnpm start
   ```
 
-The start script sets `NODE_ENV=production`. The server listens on `0.0.0.0` using the `PORT` supplied by Cloud, with a local default of `3000`. Configure the health check to use `/health`.
+The start script sets `NODE_ENV=production`. The server listens on
+`0.0.0.0` using the `PORT` supplied by Cloud, with a local default of `3000`.
+Configure startup, readiness, and liveness checks to use `/health`.
 
-The Remix asset server compiles and serves browser assets on demand; deployment does not rely on Vite's static output. Browser access is restricted to the configured Remix and `remix-ai-elements` packages, app public files, and the shared visual fixture.
+In this mode the Playground keeps its `workspace:*` dependency on
+`remix-ai-elements`. pnpm's `injectWorkspacePackages: true` and
+`dependenciesMeta.injected: true` place an installed copy in the virtual store.
+`dedupeInjectedDeps: false` keeps the Playground copy distinct, while
+`syncInjectedDepsAfterScripts: [build]` refreshes it after the package build.
+The Remix asset server therefore resolves the installed public package; it
+does not need a repository-relative `dist` or `dist/internal` mount.
 
-No database, cache, AI credentials, or other application secrets are required. The playground displays fixed visual examples only.
+The asset pipeline is on demand rather than a Vite static distribution.
+`examples/playground/remix.json` allows the app's public modules, the shared
+visual fixture, and the `remix` and `remix-ai-elements` packages. Keep that
+allowlist explicit.
+
+## Future immutable release mode
+
+Release mode is a deliberate future change, not the current dependency or
+Cloud configuration:
+
+1. Produce a real immutable GitHub Release tarball.
+2. Validate that exact tarball before changing the Playground dependency:
+   `pnpm test:consumer /path/to/immutable-release-tarball.tgz`, or pass the
+   real HTTPS release URL when one exists. The consumer script retains its
+   isolated copy and checks public exports, declarations, SSR, and the
+   Playground asset graph.
+3. In a separate reviewed change, replace the Playground `workspace:*`
+   dependency with that real tarball reference, regenerate and commit
+   `pnpm-lock.yaml`, and remove the workspace-only injected metadata.
+
+A release-mode Cloud build uses the already-built package and can run:
+
+```sh
+pnpm --filter playground build
+pnpm start
+```
+
+The start command and asset mounts do not otherwise change. A locally packed
+tarball is useful boundary coverage but is not evidence that a hosted release
+exists; this repository has not published an npm package or created a GitHub
+Release.
 
 ## Official documentation
 

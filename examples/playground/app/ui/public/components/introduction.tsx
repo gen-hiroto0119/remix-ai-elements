@@ -1,6 +1,6 @@
 import { css, type Handle, on } from "remix/component";
+import { ActionButton } from "remix-ai-elements/primitives";
 import { tokens as t } from "remix-ai-elements/theme";
-import { ActionButton } from "../../../../../../packages/remix-ai-elements/dist/internal/parts.js";
 import { officialPatterns } from "../data/catalog.ts";
 
 const column = css({

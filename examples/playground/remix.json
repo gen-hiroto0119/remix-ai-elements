@@ -6,8 +6,7 @@
     "mounts": {
       "app": "app",
       "npm": "../../node_modules",
-      "shared": "../shared",
-      "elements": "../../packages/remix-ai-elements/dist"
+      "shared": "../shared"
     },
     "allowFiles": ["app/**/public/**", "../shared/fixtures.ts"],
     "allowPackages": ["remix", "remix-ai-elements"],

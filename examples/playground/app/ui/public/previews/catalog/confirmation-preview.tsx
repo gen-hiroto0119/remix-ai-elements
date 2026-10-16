@@ -1,6 +1,6 @@
 import { type Handle, on } from "remix/component";
 import { Confirmation } from "remix-ai-elements/confirmation";
-import { ActionButton } from "../../../../../../../packages/remix-ai-elements/dist/internal/parts.js";
+import { ActionButton } from "remix-ai-elements/primitives";
 
 export function ConfirmationPreview(handle: Handle) {
   let decision: "pending" | "approved" | "denied" = "pending";

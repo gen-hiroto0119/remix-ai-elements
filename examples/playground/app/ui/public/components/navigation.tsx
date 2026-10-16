@@ -1,7 +1,6 @@
 import { css, type Handle, on } from "remix/component";
+import { Icon, scrollbarStyle } from "remix-ai-elements/primitives";
 import { tokens as t } from "remix-ai-elements/theme";
-import { Icon } from "../../../../../../packages/remix-ai-elements/dist/internal/icon.js";
-import { scrollbarStyle } from "../../../../../../packages/remix-ai-elements/dist/internal/parts.js";
 import { items, type Page } from "../data/pages.ts";
 
 const sidebar = css({

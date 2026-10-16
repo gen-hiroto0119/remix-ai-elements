@@ -1,5 +1,6 @@
 import * as assert from "remix/assert";
 import { describe, it } from "remix/test";
+import { assets, scriptEntry } from "../assets.ts";
 import { router } from "../router.ts";
 
 describe("playground controller", () => {
@@ -31,6 +32,49 @@ describe("playground controller", () => {
         new Request(`http://localhost${path}`),
       );
       assert.equal(response.status, 404);
+    }
+  });
+
+  it("serves public package entries through the browser asset graph", async () => {
+    const document = await router.fetch(new Request("http://localhost/"));
+    const html = await document.text();
+    assert.ok(html.includes(`src="${scriptEntry.href}"`));
+
+    for (const preload of scriptEntry.preloads) {
+      assert.ok(html.includes(`href="${preload}"`));
+    }
+
+    const packageEntry = await assets.getScriptEntry(
+      "app/actions/public/package-exports.ts",
+    );
+    const packageImports = Object.assign(
+      {},
+      packageEntry.importMap.imports,
+      ...Object.values(packageEntry.importMap.scopes ?? {}),
+    );
+    const packageHrefs = ["message", "theme", "primitives"].map((name) => {
+      const href = packageImports[`remix-ai-elements/${name}`];
+      assert.ok(href);
+      return href;
+    });
+
+    for (const href of new Set([
+      scriptEntry.href,
+      ...scriptEntry.preloads,
+      packageEntry.href,
+      ...packageEntry.preloads,
+      ...packageHrefs,
+    ])) {
+      const response = await assets.fetch(
+        new Request(new URL(href, "http://localhost")),
+      );
+      assert.ok(response);
+      assert.equal(response.status, 200);
+      assert.match(
+        response.headers.get("Content-Type") ?? "",
+        /javascript|ecmascript/,
+      );
+      assert.ok((await response.text()).trim().length > 0);
     }
   });
 });

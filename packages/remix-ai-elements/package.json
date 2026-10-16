@@ -8,6 +8,10 @@
     "README.md"
   ],
   "exports": {
+    "./primitives": {
+      "types": "./dist/primitives.d.ts",
+      "import": "./dist/primitives.js"
+    },
     "./chain-of-thought": {
       "types": "./dist/chain-of-thought.d.ts",
       "import": "./dist/chain-of-thought.js"
