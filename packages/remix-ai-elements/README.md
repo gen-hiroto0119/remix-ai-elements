@@ -39,6 +39,8 @@ export function Conversation() {
 
 `MessageScrollerButton`の`targetId`には、対応する`MessageScroller`の`id`を渡します。自動追従はまだ行いません。`PromptInput`はsubmitのページ遷移を抑止する表示用フォームです。独自の送信処理やEnterキー送信は持ちません。
 
+`PromptInputTextarea`は手動リサイズを無効にし、CSSの`field-sizing: content`で内容に合わせて高さを調整します。高さの初期範囲は76〜240pxで、上限を超えた内容のみ縦スクロールします。高さの自動調整には`field-sizing`対応ブラウザーが必要です。未対応ブラウザーでは`rows`に基づく高さでスクロールできます。サイズ制約は`mix`から変更できます。
+
 ## Styling
 
 追加のCSS importやTailwind設定は不要です。Remixの`css()`がSSR／ブラウザーのスタイル生成を担当します。フォントは利用側から継承します。`lightTheme`／`darkTheme`は親要素へ適用してください。切り替え・保存・OS設定との同期は利用側の責務です。

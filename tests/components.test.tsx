@@ -71,6 +71,10 @@ test("components render with Remix styles and no browser globals", async () => {
   assert.match(html, /Permission denied/);
   assert.match(html, /data-status="error"/);
   assert.match(html, /aria-label="Your message"/);
+  assert.match(html, /field-sizing:\s*content/);
+  assert.match(html, /resize:\s*none/);
+  assert.match(html, /max-height:\s*240px/);
+  assert.match(html, /overflow-y:\s*auto/);
 });
 
 test("Markdown renders structure but never runs HTML or unsafe URLs", async () => {
