@@ -1,5 +1,5 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": { "jsxImportSource": "remix/component" },
-  "include": ["*.test.tsx"]
+  "include": ["*.test.tsx", "../packages/remix-ai-elements/src/**/*.tsx"]
 }

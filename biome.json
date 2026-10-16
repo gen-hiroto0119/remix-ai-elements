@@ -5,7 +5,7 @@
       "**",
       "!**/node_modules",
       "!**/dist",
-      "!examples/shadcn-reference/src/components/ui/**",
+      "!examples/shadcn-reference/src/components/ui",
       "!examples/shadcn-reference/src/hooks/use-highlighted-code.ts",
       "!examples/shadcn-reference/src/lib/highlighter.tsx"
     ]
@@ -23,5 +23,48 @@
   },
   "javascript": {
     "jsxRuntime": "transparent"
-  }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "packages/remix-ai-elements/src/**/*.tsx",
+        "examples/playground/src/**/*.tsx",
+        "tests/**/*.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noNoninteractiveTabindex": "off",
+            "useAriaPropsSupportedByRole": "off",
+            "useSemanticElements": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["examples/shadcn-reference/src/app.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noNoninteractiveTabindex": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["examples/playground/src/app.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useValidAnchor": "off"
+          }
+        }
+      }
+    }
+  ]
 }

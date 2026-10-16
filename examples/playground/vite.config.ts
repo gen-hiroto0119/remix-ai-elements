@@ -7,9 +7,7 @@ const librarySource = fileURLToPath(
 
 export default defineConfig({
   resolve: {
-    alias: [
-      { find: /^remix-ai-elements\//, replacement: librarySource },
-    ],
+    alias: [{ find: /^remix-ai-elements\//, replacement: librarySource }],
   },
   server: {
     host: "0.0.0.0",

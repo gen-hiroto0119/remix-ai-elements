@@ -1,6 +1,6 @@
 import { createRoot } from "remix/component";
-import { App } from './app.js';
-import './styles.css';
+import { App } from "./app.js";
+import "./styles.css";
 
 const container = document.getElementById("root");
 

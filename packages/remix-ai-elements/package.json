@@ -2,7 +2,11 @@
   "name": "remix-ai-elements",
   "version": "0.1.0",
   "type": "module",
-  "files": ["dist", "LICENSES", "README.md"],
+  "files": [
+    "dist",
+    "LICENSES",
+    "README.md"
+  ],
   "exports": {
     "./message": {
       "types": "./dist/message.d.ts",

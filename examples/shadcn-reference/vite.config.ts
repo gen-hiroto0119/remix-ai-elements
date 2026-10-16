@@ -1,5 +1,5 @@
-import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 
 const referenceSource = fileURLToPath(new URL("./src/", import.meta.url));
@@ -7,9 +7,7 @@ const referenceSource = fileURLToPath(new URL("./src/", import.meta.url));
 export default defineConfig({
   plugins: [tailwindcss()],
   resolve: {
-    alias: [
-      { find: /^@\//, replacement: referenceSource },
-    ],
+    alias: [{ find: /^@\//, replacement: referenceSource }],
   },
   server: {
     host: "0.0.0.0",

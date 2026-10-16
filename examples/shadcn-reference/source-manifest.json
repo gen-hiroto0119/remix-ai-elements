@@ -36,9 +36,7 @@
         "name": "trace",
         "url": "https://ui.shadcn.com/r/styles/base-rhea/trace.json",
         "rawSha256": "2bcc391ed529f7b4ea3e6c883263074f19d76e0494d62d7cb24012f55bdaaa42",
-        "registryDependencies": [
-          "collapsible"
-        ],
+        "registryDependencies": ["collapsible"],
         "files": [
           {
             "upstreamPath": "registry/base-rhea/ui/trace.tsx",
@@ -50,10 +48,7 @@
         "name": "code-block",
         "url": "https://ui.shadcn.com/r/styles/base-rhea/code-block.json",
         "rawSha256": "e670f049ae7f4d4e6c8718fc02ccdb682dd398e1d1fb30b51223b099c81ee3d4",
-        "registryDependencies": [
-          "button",
-          "use-highlighted-code"
-        ],
+        "registryDependencies": ["button", "use-highlighted-code"],
         "files": [
           {
             "upstreamPath": "registry/base-rhea/ui/code-block.tsx",
@@ -65,11 +60,7 @@
         "name": "input-group",
         "url": "https://ui.shadcn.com/r/styles/base-rhea/input-group.json",
         "rawSha256": "5c74eb091e15c644c5203afaf9cf0cfcb7533456143f3a5bdc9363056c19a71b",
-        "registryDependencies": [
-          "button",
-          "input",
-          "textarea"
-        ],
+        "registryDependencies": ["button", "input", "textarea"],
         "files": [
           {
             "upstreamPath": "registry/base-rhea/ui/input-group.tsx",

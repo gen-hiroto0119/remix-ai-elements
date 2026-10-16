@@ -14,6 +14,9 @@ importers:
       '@types/node':
         specifier: 24.0.0
         version: 24.0.0
+      remix:
+        specifier: 3.0.0
+        version: 3.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
       tsx:
         specifier: 4.20.6
         version: 4.20.6
