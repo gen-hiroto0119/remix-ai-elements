@@ -65,6 +65,11 @@ describe("playground controller", () => {
       ...packageEntry.preloads,
       ...packageHrefs,
     ])) {
+      assert.ok(
+        !/\/\./.test(
+          decodeURIComponent(new URL(href, "http://localhost").pathname),
+        ),
+      );
       const response = await assets.fetch(
         new Request(new URL(href, "http://localhost")),
       );

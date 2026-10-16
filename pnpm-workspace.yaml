@@ -3,6 +3,7 @@ packages:
   - examples/*
 
 injectWorkspacePackages: true
+virtualStoreDir: node_modules/pnpm-store
 dedupeInjectedDeps: false
 syncInjectedDepsAfterScripts:
   - build

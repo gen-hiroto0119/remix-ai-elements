@@ -37,6 +37,13 @@ In this mode the Playground keeps its `workspace:*` dependency on
 The Remix asset server therefore resolves the installed public package; it
 does not need a repository-relative `dist` or `dist/internal` mount.
 
+The workspace sets `virtualStoreDir: node_modules/pnpm-store` so generated
+package asset URLs do not contain a hidden `.pnpm` path segment. Cloud's Nginx
+blocks dot-directory paths before they reach Remix. Keep this storage layout
+instead of disabling Cloud's hidden-file protection; Remix's package allowlist
+and private-module rejection remain unchanged. A clean frozen install applies
+the layout without changing package versions.
+
 The asset pipeline is on demand rather than a Vite static distribution.
 `examples/playground/remix.json` allows the app's public modules, the shared
 visual fixture, and the `remix` and `remix-ai-elements` packages. Keep that
