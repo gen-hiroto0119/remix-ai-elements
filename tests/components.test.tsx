@@ -75,6 +75,10 @@ test("components render with Remix styles and no browser globals", async () => {
   assert.match(html, /resize:\s*none/);
   assert.match(html, /max-height:\s*240px/);
   assert.match(html, /overflow-y:\s*auto/);
+  assert.match(html, /@supports selector\(::-webkit-scrollbar\)/);
+  assert.match(html, /::-webkit-scrollbar-thumb/);
+  assert.match(html, /::-webkit-scrollbar-button/);
+  assert.match(html, /background-clip:\s*padding-box/);
 });
 
 test("Markdown renders structure but never runs HTML or unsafe URLs", async () => {

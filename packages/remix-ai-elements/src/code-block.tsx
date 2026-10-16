@@ -1,6 +1,6 @@
 import { css, type Handle, on, type Props } from "remix/component";
 import { Icon } from "./internal/icon.js";
-import { ActionButton, focusRing } from "./internal/parts.js";
+import { ActionButton, focusRing, scrollbarStyle } from "./internal/parts.js";
 import { tokens as t } from "./theme.js";
 
 export type CodeBlockProps = Omit<Props<"div">, "children"> & {
@@ -122,7 +122,7 @@ export function CodeBlock(handle: Handle<CodeBlockProps>) {
           data-wrap={String(wrap)}
           tabIndex={0}
           aria-label={filename || `${language} code`}
-          mix={[preStyle, focusRing]}
+          mix={[preStyle, scrollbarStyle, focusRing]}
         >
           <code>
             {lineNumbers

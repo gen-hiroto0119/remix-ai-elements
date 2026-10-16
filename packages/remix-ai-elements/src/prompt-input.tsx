@@ -1,6 +1,11 @@
 import { css, type Handle, on, type Props } from "remix/component";
 import { Icon } from "./internal/icon.js";
-import { ActionButton, divPart, focusRing } from "./internal/parts.js";
+import {
+  ActionButton,
+  divPart,
+  focusRing,
+  scrollbarStyle,
+} from "./internal/parts.js";
 import { tokens as t } from "./theme.js";
 
 export type PromptStatus = "ready" | "submitted" | "streaming" | "error";
@@ -47,8 +52,6 @@ const textareaStyle = css({
   fieldSizing: "content",
   resize: "none",
   overflowY: "auto",
-  scrollbarWidth: "thin",
-  scrollbarColor: `${t.border} transparent`,
   padding: "12px 14px",
   border: 0,
   outline: "none",
@@ -71,7 +74,7 @@ export function PromptInputTextarea(handle: Handle<Props<"textarea">>) {
         rows={2}
         {...props}
         data-slot="prompt-input-textarea"
-        mix={[textareaStyle, mix]}
+        mix={[textareaStyle, scrollbarStyle, mix]}
       />
     );
   };

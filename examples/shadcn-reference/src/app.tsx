@@ -231,7 +231,7 @@ function Conversation({ state }: { state: State }) {
               aria-label="Your message"
               placeholder="Ask a follow-up…"
               aria-invalid={state === "error" || undefined}
-              className="min-h-[76px] max-h-[240px] overflow-y-auto px-3.5 py-3 [scrollbar-width:thin]"
+              className="min-h-[76px] max-h-[240px] overflow-y-auto px-3.5 py-3"
             />
             <InputGroupAddon align="block-end">
               <InputGroupButton

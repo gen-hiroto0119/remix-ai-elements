@@ -10,6 +10,33 @@ export const focusRing: CSSMixinDescriptor = css({
   "&:focus-visible": { outline: `2px solid ${t.ring}`, outlineOffset: "3px" },
 });
 
+export const scrollbarStyle: CSSMixinDescriptor = css({
+  scrollbarWidth: "thin",
+  scrollbarColor: `${t.ring} transparent`,
+  "@supports selector(::-webkit-scrollbar)": {
+    scrollbarWidth: "auto",
+    scrollbarColor: "auto",
+    "&::-webkit-scrollbar": { width: "10px", height: "10px" },
+    "&::-webkit-scrollbar-track, &::-webkit-scrollbar-corner": {
+      background: "transparent",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      minHeight: "36px",
+      minWidth: "36px",
+      border: "3px solid transparent",
+      borderRadius: "999px",
+      backgroundColor: t.ring,
+      backgroundClip: "padding-box",
+    },
+    "&::-webkit-scrollbar-thumb:hover": { backgroundColor: t.subtle },
+    "&::-webkit-scrollbar-button": {
+      display: "none",
+      width: 0,
+      height: 0,
+    },
+  },
+});
+
 export function divPart(slot: string, styles: CSSMixinDescriptor) {
   return function Part(handle: Handle<Props<"div">>) {
     return () => {

@@ -1,6 +1,6 @@
 import { css, type Handle, on, type Props } from "remix/component";
 import { Icon } from "./internal/icon.js";
-import { ActionButton, divPart } from "./internal/parts.js";
+import { ActionButton, divPart, scrollbarStyle } from "./internal/parts.js";
 import { tokens as t } from "./theme.js";
 
 const viewportStyle = css({
@@ -9,8 +9,6 @@ const viewportStyle = css({
   overflowY: "auto",
   overflowX: "hidden",
   overscrollBehavior: "contain",
-  scrollbarWidth: "thin",
-  scrollbarColor: `${t.border} transparent`,
   "&:focus-visible": { outline: `2px solid ${t.ring}`, outlineOffset: "-2px" },
 });
 export function MessageScroller(handle: Handle<Props<"section">>) {
@@ -22,7 +20,7 @@ export function MessageScroller(handle: Handle<Props<"section">>) {
         tabIndex={0}
         {...props}
         data-slot="message-scroller"
-        mix={[viewportStyle, mix]}
+        mix={[viewportStyle, scrollbarStyle, mix]}
       />
     );
   };

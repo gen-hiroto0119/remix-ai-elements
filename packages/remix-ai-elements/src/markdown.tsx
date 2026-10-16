@@ -7,6 +7,7 @@ import {
   type RemixNode,
 } from "remix/component";
 import { CodeBlock } from "./code-block.js";
+import { scrollbarStyle } from "./internal/parts.js";
 import { tokens as t } from "./theme.js";
 
 export type MarkdownProps = Omit<Props<"div">, "children"> & {
@@ -134,7 +135,13 @@ function renderTokens(tokens: Token[]): RemixNode {
       }
       case "table":
         return (
-          <div data-table-scroll tabIndex={0} role="region" aria-label="Table">
+          <div
+            data-table-scroll
+            tabIndex={0}
+            role="region"
+            aria-label="Table"
+            mix={scrollbarStyle}
+          >
             <table>
               <thead>
                 <tr>
