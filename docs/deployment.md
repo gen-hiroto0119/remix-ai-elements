@@ -28,4 +28,4 @@ No database, cache, AI credentials, or other application secrets are required. T
 ## Official documentation
 
 - [Laravel Cloud deployments](https://laravel.com/cloud/docs/deployments)
-- [Using Yarn, Bun, or pnpm](https://laravel.com/cloud/knowledge-base/using-yarn-bun-pnpm)
+- [Using Yarn, Bun, or pnpm](https://laravel.com/cloud/docs/knowledge-base/using-yarn-bun-pnpm)

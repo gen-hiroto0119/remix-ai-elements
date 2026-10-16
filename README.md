@@ -16,7 +16,7 @@ pnpm install --frozen-lockfile
 pnpm dev               # packageをビルドしてRemix playgroundを起動: http://localhost:5173
 pnpm dev:reference     # 別ターミナルでshadcn参照画面を起動: http://localhost:5174
 pnpm test:playground   # Remixのcontroller/SSRテスト
-pnpm build:playground  # packageとplaygroundのアセットをビルド
+pnpm build:playground  # packageをビルドし、公開アセット一覧を検証
 pnpm start             # productionモードで起動
 ```
 
