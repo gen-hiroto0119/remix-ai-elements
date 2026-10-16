@@ -11,20 +11,22 @@ import {
   statSync,
   writeFileSync,
 } from "node:fs";
-import { homedir } from "node:os";
+import { tmpdir } from "node:os";
 import { basename, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-const consumerParent = join(homedir(), ".devin-files");
-assert.ok(
-  existsSync(consumerParent),
-  `Expected persistent consumer parent at ${consumerParent}`,
-);
+const consumerParent = resolve(process.env.CONSUMER_OUTPUT_DIR || tmpdir());
+mkdirSync(consumerParent, { recursive: true });
 const consumer = mkdtempSync(join(consumerParent, "remix-elements-consumer-"));
 const playground = join(consumer, "examples", "playground");
 const shared = join(consumer, "examples", "shared");
 const packageArgument = process.argv[2];
+const rootPackage = JSON.parse(
+  readFileSync(resolve(root, "package.json"), "utf8"),
+);
+const nodeTypesVersion = rootPackage.devDependencies?.["@types/node"];
+assert.ok(nodeTypesVersion, "Expected @types/node in root devDependencies");
 
 mkdirSync(playground, { recursive: true });
 mkdirSync(shared, { recursive: true });
@@ -39,6 +41,9 @@ writeFileSync(
       private: true,
       type: "module",
       workspaces: ["examples/playground"],
+      devDependencies: {
+        "@types/node": nodeTypesVersion,
+      },
     },
     null,
     2,
@@ -200,6 +205,18 @@ execFileSync(
   { cwd: consumer, stdio: "inherit" },
 );
 console.log("Packed declarations passed in an isolated consumer.");
+
+execFileSync(
+  process.execPath,
+  [
+    resolve(root, "node_modules/typescript/bin/tsc"),
+    "--noEmit",
+    "-p",
+    join(playground, "tsconfig.json"),
+  ],
+  { cwd: consumer, stdio: "inherit" },
+);
+console.log("Copied Playground typecheck passed.");
 
 const remixBin = join(consumer, "node_modules", ".bin", "remix");
 assert.ok(existsSync(remixBin), `Expected installed Remix CLI at ${remixBin}`);

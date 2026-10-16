@@ -62,15 +62,18 @@ pnpm build
 pnpm test:consumer
 ```
 
-`test:consumer`はビルド後のローカルtarballを独立した永続検証ディレクトリに
+`test:consumer`はビルド後のローカルtarballを独立した検証ディレクトリに
 インストールし、公開exports・`/primitives`の型／SSR・React／Tailwind／AI SDK
-依存の不在、Playgroundのasset graph、非公開assetの拒否を確認します。実際の
-immutable GitHub Release tarballを検証するときだけ、追加のローカルパスまたは
-HTTPS URLを引数に渡します。
+依存の不在、Playgroundの型とasset graph、非公開assetの拒否を確認します。
+既定ではOSの一時ディレクトリを使いますが、検証コピーは自動削除しません。
+`CONSUMER_OUTPUT_DIR`で保存先の親ディレクトリを指定できます。実際のimmutable
+GitHub Release tarballを検証するときだけ、追加のローカルパスまたはHTTPS URLを
+引数に渡します。
 
 ```sh
 pnpm test:consumer
 pnpm test:consumer /path/to/immutable-release-tarball.tgz
+CONSUMER_OUTPUT_DIR=/path/to/retained-dir pnpm test:consumer
 ```
 
 このリポジトリはnpm公開やGitHub Release作成を行っておらず、上記のRelease

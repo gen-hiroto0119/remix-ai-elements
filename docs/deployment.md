@@ -55,17 +55,24 @@ Cloud configuration:
    dependency with that real tarball reference, regenerate and commit
    `pnpm-lock.yaml`, and remove the workspace-only injected metadata.
 
-A release-mode Cloud build uses the already-built package and can run:
+A future release-mode Cloud deployment can build the Playground from the
+tarball recorded in its lockfile with:
 
 ```sh
-pnpm --filter playground build
+npm install -g pnpm@11.21.0 && pnpm install --frozen-lockfile && pnpm --filter playground build
+```
+
+Use the same start command:
+
+```sh
 pnpm start
 ```
 
-The start command and asset mounts do not otherwise change. A locally packed
-tarball is useful boundary coverage but is not evidence that a hosted release
-exists; this repository has not published an npm package or created a GitHub
-Release.
+This build installs dependencies and builds only the Playground; it does not
+build the local component package. The start command and asset mounts do not
+otherwise change. A locally packed tarball is useful boundary coverage but is
+not evidence that a hosted release exists; this repository has not published an
+npm package or created a GitHub Release.
 
 ## Official documentation
 
