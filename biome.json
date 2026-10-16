@@ -1,0 +1,27 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.2/schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/dist",
+      "!examples/shadcn-reference/src/components/ui/**",
+      "!examples/shadcn-reference/src/hooks/use-highlighted-code.ts",
+      "!examples/shadcn-reference/src/lib/highlighter.tsx"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "javascript": {
+    "jsxRuntime": "transparent"
+  }
+}

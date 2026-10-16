@@ -1,0 +1,7 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsxImportSource": "remix/component"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

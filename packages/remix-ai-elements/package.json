@@ -1,0 +1,57 @@
+{
+  "name": "remix-ai-elements",
+  "version": "0.1.0",
+  "type": "module",
+  "files": ["dist", "LICENSES", "README.md"],
+  "exports": {
+    "./message": {
+      "types": "./dist/message.d.ts",
+      "import": "./dist/message.js"
+    },
+    "./message-scroller": {
+      "types": "./dist/message-scroller.d.ts",
+      "import": "./dist/message-scroller.js"
+    },
+    "./prompt-input": {
+      "types": "./dist/prompt-input.d.ts",
+      "import": "./dist/prompt-input.js"
+    },
+    "./trace": {
+      "types": "./dist/trace.d.ts",
+      "import": "./dist/trace.js"
+    },
+    "./reasoning": {
+      "types": "./dist/reasoning.d.ts",
+      "import": "./dist/reasoning.js"
+    },
+    "./tool": {
+      "types": "./dist/tool.d.ts",
+      "import": "./dist/tool.js"
+    },
+    "./markdown": {
+      "types": "./dist/markdown.d.ts",
+      "import": "./dist/markdown.js"
+    },
+    "./code-block": {
+      "types": "./dist/code-block.d.ts",
+      "import": "./dist/code-block.js"
+    },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "marked": "16.3.0"
+  },
+  "peerDependencies": {
+    "remix": "^3.0.0"
+  },
+  "devDependencies": {
+    "remix": "3.0.0"
+  }
+}

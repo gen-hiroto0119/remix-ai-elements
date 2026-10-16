@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsxImportSource": "react",
+    "paths": {
+      "remix-ai-elements/*": ["packages/remix-ai-elements/src/*"],
+      "@/*": ["examples/shadcn-reference/src/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"]
+}

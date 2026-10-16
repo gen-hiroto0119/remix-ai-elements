@@ -1,0 +1,14 @@
+{
+  "name": "playground",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "remix": "3.0.0",
+    "remix-ai-elements": "workspace:*"
+  }
+}
