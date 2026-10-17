@@ -1,11 +1,15 @@
 import { createController } from "remix/router";
 import { assets } from "../assets.ts";
 import { routes } from "../routes.ts";
+import { chatResponse } from "./chat.ts";
 import { Document } from "./document.tsx";
 import { Playground } from "./public/playground.tsx";
 
 export default createController(routes, {
   actions: {
+    chat(context) {
+      return chatResponse(context.request);
+    },
     async assets(context) {
       return (
         (await assets.fetch(context.request)) ??

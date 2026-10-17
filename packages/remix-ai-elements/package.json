@@ -8,6 +8,11 @@
     "README.md"
   ],
   "exports": {
+    "./ai-sdk": {
+      "types": "./dist/ai-sdk.d.ts",
+      "browser": "./dist/ai-sdk.browser.js",
+      "import": "./dist/ai-sdk.js"
+    },
     "./primitives": {
       "types": "./dist/primitives.d.ts",
       "import": "./dist/primitives.js"
@@ -114,16 +119,24 @@
     }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && node build-browser.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "marked": "16.3.0"
   },
   "peerDependencies": {
+    "ai": "^7.0.142",
     "remix": "^3.0.0"
   },
+  "peerDependenciesMeta": {
+    "ai": {
+      "optional": true
+    }
+  },
   "devDependencies": {
+    "ai": "7.0.142",
+    "esbuild": "0.25.12",
     "remix": "3.0.0"
   }
 }

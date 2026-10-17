@@ -97,7 +97,11 @@ export function PreviewPanel(handle: Handle<PreviewPanelProps>) {
       <div mix={preview}>{handle.props.children}</div>
       <div mix={footer}>
         <span>Built with remix/component · css() / mix</span>
-        <span>Static fixtures · No AI connection</span>
+        <span>
+          {handle.props.page === "Streaming chat"
+            ? "AI SDK transport · Simulated model"
+            : "Static fixtures · No AI connection"}
+        </span>
       </div>
     </main>
   );

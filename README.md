@@ -1,9 +1,10 @@
 # remix-ai-elements
 
-shadcn AI Elementsを参考にした、Remix v3ネイティブのnpmコンポーネント集です。現在は**見た目を確認する初期実装**で、npmには未公開です。
+shadcn AI Elementsを参考にした、Remix v3ネイティブのnpmコンポーネント集です。表示部品と任意のAI SDK接続を提供する初期実装で、APIは未安定・npm未公開です。
 
-- [設計・実装方針](docs/design.md) — AI SDK接続など、今後の全体設計
+- [設計・実装方針](docs/design.md) — AI SDK接続を含む全体方針と将来設計
 - [表示部品の使い方](packages/remix-ai-elements/README.md)
+- [AI SDK接続とストリーミングデモ](docs/ai-sdk.md)
 - [公式21パターンとの対応・差分](docs/visual-coverage.md)
 - [公式Remix 3 Skill](.agents/skills/remix/SKILL.md) / [取得元・バージョン](.agents/skills/remix/SOURCE.md)
 
@@ -24,11 +25,11 @@ PlaygroundはRemixサーバーがHTMLをSSRし、ブラウザーで同じRemix�
 
 Introductionから公式一覧の21パターンへ移動できます。追加した16項目には、確認／復元のローカル状態、モデル選択、引用・Contextのポップアップ、ファイル選択、処理経過の表示例を含みます。開発中は既存の比較対象でローカルのReact参照画面、追加項目とIntroductionでは対応する公式ページを開きます。productionでは公式ページを開きます。
 
-**AI接続・実際の送信・AIストリーミング・自動スクロール追従は未実装です。** 状態は固定データの表示例であり、実処理の成功・失敗を示しません。PlaygroundのアセットはRemixのサーバーからオンデマンドで配信されます。
+**Streaming chat**は別の接続デモです。AI SDKを通じてサーバーへ送信し、模擬モデルの回答をSSEで受信します。停止・再生成・HTTP／ストリームエラー・再試行と末尾追従を試せます。外部AI呼び出し、永続化、再接続、実ツール実行は含みません。既存21パターンは引き続き固定データの表示例です。PlaygroundのアセットはRemixのサーバーからオンデマンドで配信されます。
 
 ## 構成
 
-- `packages/remix-ai-elements` — `remix/component`と`css()`／`mix`で実装。React・Tailwind・AI SDKには依存しません。
+- `packages/remix-ai-elements` — `remix/component`と`css()`／`mix`で実装。表示部品にReact・Tailwind・AI SDKは不要です。任意の`/ai-sdk`入口だけがAI SDKを使用します。
 - `examples/playground` — Remix版の表示カタログ。
 - `examples/shadcn-reference` — 公式Base Rhea部品を保存した非公開React参照アプリ。取得元・スナップショットhash・ライセンスを記録しています。
 - `examples/shared/fixtures.ts` — 両画面で使うサンプル会話。
@@ -63,8 +64,7 @@ pnpm test:consumer
 ```
 
 `test:consumer`はビルド後のローカルtarballを独立した検証ディレクトリに
-インストールし、公開exports・`/primitives`の型／SSR・React／Tailwind／AI SDK
-依存の不在、Playgroundの型とasset graph、非公開assetの拒否を確認します。
+インストールし、公開exports・型／SSR・React／Tailwind依存の不在、AI SDKなしの表示部品、AI SDKありの接続入口、Playgroundの型とasset graph、非公開assetの拒否を確認します。
 既定ではOSの一時ディレクトリを使いますが、検証コピーは自動削除しません。
 `CONSUMER_OUTPUT_DIR`で保存先の親ディレクトリを指定できます。実際のimmutable
 GitHub Release tarballを検証するときだけ、追加のローカルパスまたはHTTPS URLを

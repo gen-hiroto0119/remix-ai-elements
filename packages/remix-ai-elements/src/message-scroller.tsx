@@ -1,4 +1,4 @@
-import { css, type Handle, on, type Props } from "remix/component";
+import { css, type Handle, on, type Props, ref } from "remix/component";
 import { Icon } from "./internal/icon.js";
 import { ActionButton, divPart, scrollbarStyle } from "./internal/parts.js";
 import { tokens as t } from "./theme.js";
@@ -11,16 +11,45 @@ const viewportStyle = css({
   overscrollBehavior: "contain",
   "&:focus-visible": { outline: `2px solid ${t.ring}`, outlineOffset: "-2px" },
 });
-export function MessageScroller(handle: Handle<Props<"section">>) {
+export function MessageScroller(
+  handle: Handle<Props<"section"> & { autoScroll?: boolean }>,
+) {
+  const follow = ref((viewport: HTMLElement, signal) => {
+    let atBottom = true;
+    viewport.addEventListener(
+      "scroll",
+      () => {
+        atBottom =
+          viewport.scrollHeight - viewport.scrollTop - viewport.clientHeight <
+          32;
+      },
+      { signal },
+    );
+    const observer = new ResizeObserver(() => {
+      if (handle.props.autoScroll && atBottom)
+        viewport.scrollTop = viewport.scrollHeight;
+    });
+    observer.observe(viewport);
+    if (viewport.firstElementChild)
+      observer.observe(viewport.firstElementChild);
+    signal.addEventListener("abort", () => observer.disconnect(), {
+      once: true,
+    });
+  });
   return () => {
-    const { mix, ...props } = handle.props;
+    const { mix, autoScroll, ...props } = handle.props;
     return (
       <section
         aria-label="Conversation"
         tabIndex={0}
         {...props}
         data-slot="message-scroller"
-        mix={[viewportStyle, scrollbarStyle, mix]}
+        mix={[
+          viewportStyle,
+          scrollbarStyle,
+          autoScroll ? follow : undefined,
+          mix,
+        ]}
       />
     );
   };
