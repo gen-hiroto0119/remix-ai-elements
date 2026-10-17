@@ -57,7 +57,8 @@ export function Introduction(
       </div>
       <p mix={muted}>
         Supporting primitives: Message scroller, Trace, Markdown, and Code
-        block. AI transport, execution, and npm publishing remain separate work.
+        block. Try Streaming chat for the SDK transport demo. Real models and
+        npm publishing are not included.
       </p>
     </div>
   );
