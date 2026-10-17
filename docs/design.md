@@ -1,8 +1,8 @@
 # Remix AI Elements — 設計案
 
-> 実装状況（2026-10-16）: ユーザーの指定により、実装範囲は**見た目のみ**です。以下は将来のAI接続まで含む設計であり、現在の機能保証ではありません。固定データのUI部品、SSR／ハイドレーション対応のRemix playground、shadcn参照画面を用意し、AI SDK／実際の送信／AIストリーミング／自動追従は後続です。現状の範囲はREADMEを参照してください。
+> 実装状況: 表示カタログに加えて、任意の`/ai-sdk`入口と模擬モデルによる送信・ストリーミング・停止・再生成の初期実装を追加しています。実モデル・永続化・ツール実行は未実装です。以下には将来設計も含まれます。現行APIと範囲は[AI SDK接続ガイド](ai-sdk.md)とREADMEを参照してください。
 
-更新日: 2026-10-16 / 第3版 / 状態: 基本方針合意済み・未実装
+更新日: 2026-10-17 / 第3版 / 状態: 基本方針合意済み・一部初期実装
 
 第2版の変更: 外部CSSファイル配布をRemix標準の`css()`／`mix`へ変更。サーバー側AI SDKとの接続を後続機能ではなく初期版の主経路に変更した。
 
@@ -125,7 +125,7 @@ Remix本体をバンドルに含めず、JSX runtimeやcontextの重複を避け
 
 ## 5. 初期コンポーネントと公開API
 
-以下は提案APIであり、実装済みAPIではない。UI部品のpropsにはReactやAI SDKの型を漏らさない。一方、`/ai-sdk`入口はSDK連携が目的なので`UIMessage`などSDKの公開型を使い、情報を失う独自メッセージ形式への変換を強制しない。
+以下は当初の提案であり、現行実装の完全なAPI一覧ではない。UI部品のpropsにはReactやAI SDKの型を漏らさない。一方、`/ai-sdk`入口はSDK連携が目的なので`UIMessage`などSDKの公開型を使い、情報を失う独自メッセージ形式への変換を強制しない。現在の`/ai-sdk` APIは[接続ガイド](ai-sdk.md)を参照する。
 
 | 部品 | 主な責務・API案 |
 | --- | --- |
@@ -250,9 +250,9 @@ Remixの`remix/router`は標準のRequest／Responseを扱えるので、専用�
 
 推論内容を送るかどうかはサーバーで明示する。調査版の`toUIMessageStream`は`sendReasoning: true`が既定なので、非公開にしたいアプリでは必ず`false`にする。モデルが公開しない推論は生成・補完しない。tool入出力にも機密情報があり得るため、UIへ送るデータを許可リストで設計する。内部エラーやproviderのエラーを無加工でクライアントへ流さない。
 
-### Remix側の接続API案
+### Remix側の将来拡張案
 
-公開名は`createChat<UI_MESSAGE extends UIMessage>()`を候補とする。以下は本ライブラリがこれから提供するAPIであり、AI SDK既存の関数名ではない。
+以下は初期設計時の案であり、現行APIではない。初期実装では`Chat`と`createChat(handle, options)`を提供している。正確なsignatureと対応範囲は[接続ガイド](ai-sdk.md)を参照する。
 
 | API案 | 責務 |
 | --- | --- |
@@ -386,4 +386,4 @@ pnpm workspaceを候補にし、初期は公開パッケージ1つ、Remix playg
 - [AI SDK 7 migration guide](https://ai-sdk.dev/docs/migration-guides/migration-guide-7-0)
 - [AI SDK transport](https://ai-sdk.dev/docs/ai-sdk-ui/transport)
 - [AI SDK stream protocols](https://ai-sdk.dev/docs/ai-sdk-ui/stream-protocol)
-- [AI SDK package 7.0.142](https://www.npmjs.com/package/ai/v/7.0.142) — 同梱docsと`src/ui/chat.ts`、`src/ui/default-chat-transport.ts`、`src/ui-message-stream/`を確認。上記APIを組み合わせたRemixアプリの実動確認は今後の実装段階で行う。
+- [AI SDK package 7.0.142](https://www.npmjs.com/package/ai/v/7.0.142) — 同梱docsと`src/ui/chat.ts`、`src/ui/default-chat-transport.ts`、`src/ui-message-stream/`を確認。

@@ -2,6 +2,7 @@ import { catalogDescriptions, officialPatterns } from "./catalog.ts";
 
 export const items = [
   "Introduction",
+  "Streaming chat",
   ...officialPatterns,
   "Message scroller",
   "Trace",
@@ -14,6 +15,8 @@ export type Scenario = "complete" | "empty" | "thinking" | "error";
 
 export const descriptions: Record<Page, string> = {
   ...catalogDescriptions,
+  "Streaming chat":
+    "An AI SDK connection with send, streaming, stop, and retry — using a simulated model.",
   Introduction:
     "The complete AI Elements pattern catalog, with Remix-native building blocks.",
   Chat: "A conversation, composed from small Remix-native components.",

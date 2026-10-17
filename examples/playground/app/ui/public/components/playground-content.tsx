@@ -4,6 +4,7 @@ import { isCatalogPage, officialUrl } from "../data/catalog.ts";
 import { descriptions, type Page, type Scenario } from "../data/pages.ts";
 import { ChatPreview } from "../previews/chat-preview.tsx";
 import { PagePreview } from "../previews/page-preview.tsx";
+import { StreamingChatPreview } from "../previews/streaming-chat-preview.tsx";
 import { Introduction } from "./introduction.tsx";
 import { PreviewPanel } from "./preview-panel.tsx";
 
@@ -40,6 +41,18 @@ export function PlaygroundContent(
 
   return () => {
     const { page, dark } = handle.props;
+    const referenceUrl =
+      page === "Streaming chat"
+        ? "https://ai-sdk.dev/docs/ai-sdk-ui/transport"
+        : [
+              "Introduction",
+              "Message scroller",
+              "Trace",
+              "Markdown",
+              "Code block",
+            ].includes(page)
+          ? "https://ui.shadcn.com/docs/ai-elements"
+          : officialUrl(page);
     const controls = (
       <>
         {page === "Chat" ? (
@@ -79,21 +92,10 @@ export function PlaygroundContent(
               if (
                 !handle.props.localReference ||
                 isCatalogPage(page) ||
-                page === "Introduction"
+                page === "Introduction" ||
+                page === "Streaming chat"
               ) {
-                window.open(
-                  [
-                    "Introduction",
-                    "Message scroller",
-                    "Trace",
-                    "Markdown",
-                    "Code block",
-                  ].includes(page)
-                    ? "https://ui.shadcn.com/docs/ai-elements"
-                    : officialUrl(page),
-                  "_blank",
-                  "noopener,noreferrer",
-                );
+                window.open(referenceUrl, "_blank", "noopener,noreferrer");
                 return;
               }
               url.port = "5174";
@@ -102,7 +104,9 @@ export function PlaygroundContent(
             }),
           ]}
         >
-          shadcn reference ↗
+          {page === "Streaming chat"
+            ? "AI SDK transport ↗"
+            : "shadcn reference ↗"}
         </button>
       </>
     );
@@ -111,6 +115,8 @@ export function PlaygroundContent(
         <Introduction navigate={handle.props.onNavigate} />
       ) : page === "Chat" ? (
         <ChatPreview scenario={scenario} />
+      ) : page === "Streaming chat" ? (
+        <StreamingChatPreview />
       ) : (
         <PagePreview key={page} page={page} />
       );
