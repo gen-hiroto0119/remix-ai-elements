@@ -26,6 +26,8 @@ describe("playground controller", () => {
       "/assets/app/assets.ts",
       "/assets/app/actions/controller.tsx",
       "/assets/app/actions/controller.test.ts",
+      "/assets/app/actions/chat.ts",
+      "/assets/app/actions/demo-model.ts",
       "/assets/shared/not-a-fixture.ts",
     ]) {
       const response = await router.fetch(
@@ -52,11 +54,13 @@ describe("playground controller", () => {
       packageEntry.importMap.imports,
       ...Object.values(packageEntry.importMap.scopes ?? {}),
     );
-    const packageHrefs = ["message", "theme", "primitives"].map((name) => {
-      const href = packageImports[`remix-ai-elements/${name}`];
-      assert.ok(href);
-      return href;
-    });
+    const packageHrefs = ["message", "theme", "primitives", "ai-sdk"].map(
+      (name) => {
+        const href = packageImports[`remix-ai-elements/${name}`];
+        assert.ok(href);
+        return href;
+      },
+    );
 
     for (const href of new Set([
       scriptEntry.href,

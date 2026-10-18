@@ -40,7 +40,37 @@ entrypoints.
 
 Callbacks belong to the consuming application; these components do not execute commands or call AI services. `ModelSelector` and `FileTree` support `value`/`defaultValue` and a change callback (`onValueChange` and `onSelect`, respectively). Popovers use the native HTML Popover API with viewport-constrained positioning; use a modern browser. All styles remain self-contained Remix `css()` mixins.
 
-Remix 3の表示部品。現在は見た目を確認する初期版です。APIは未安定・npm未公開です。
+Remix 3の表示部品と任意のAI SDK接続。APIは未安定・npm未公開です。
+
+## Optional AI SDK binding
+
+`remix-ai-elements/ai-sdk` exports `Chat`, `createChat(handle, options)`, and `DefaultChatTransport`.
+Install `ai@7.0.142` alongside the package to use this entrypoint; `ai` is an
+optional peer and is not needed for visual components. No React binding is used.
+
+The `browser` export is a self-contained ESM bundle built against `ai@7.0.142`;
+the Node/SSR export uses the installed `ai` peer. Import `DefaultChatTransport`
+from this entrypoint in native Remix browser code, rather than from `ai`'s root
+(which pulls in dependencies that Remix's asset server cannot serve directly).
+Updating the app's SDK alone does not update the browser bundle; rebuild/release
+this package to update it. Bundled dependency notices are included in `dist`.
+
+Create a chat once in component setup. `createChat` subscribes updates to the
+Remix handle and disposes the transport when its signal aborts. `Chat` can instead
+be owned explicitly with `subscribe(listener)` (returns an unsubscribe function)
+and `await chat.dispose()`. Constructing either makes no request. Do not share a
+server singleton between users. Supply a stable `id` if it appears in SSR output.
+
+Messages, status, error, `sendMessage`, `regenerate`, `stop`, `clearError`, and
+tool methods follow AI SDK's `AbstractChat` API. Treat messages as read-only
+snapshots; use `chat.messages = nextMessages` to replace them. Incoming changed
+messages are cloned before publication. Metadata/tool data must be structured-
+cloneable (normally JSON). Input drafts are owned by your form, not by the chat.
+
+Model credentials and tools belong in your app's server action. This package
+does not provide a chat server, authentication, persistence, or approval policy.
+See the [integration guide](../../docs/ai-sdk.md) and the Playground's
+`Streaming chat` page for a no-key, text-only simulated model example.
 
 ```tsx
 import { Message, MessageContent, MessageBubble } from 'remix-ai-elements/message';
@@ -75,10 +105,11 @@ export function Conversation() {
 | `/code-block` | CodeBlock, CodeBlockCopyButton |
 | `/theme` | lightTheme, darkTheme, tokens |
 | `/primitives` | Icon, IconName (type), ActionButton, focusRing, scrollbarStyle |
+| `/ai-sdk` | Chat, createChat (requires optional `ai@7.0.142` peer) |
 
 部品は対応するDOM属性と`mix`を受け取り、内部スタイルの後で利用者のmixinを合成します。`TraceDisclosure`は`defaultOpen`で初期状態を指定し、制御する場合は`open`と`onOpenChange`を組み合わせます。`Reasoning`の`duration`は秒です。`Tool`は文字列の`input`・`output`を表示し、`pending | running | success | error`を受け取ります。JSONなら利用側で`JSON.stringify`してください。
 
-`MessageScrollerButton`の`targetId`には、対応する`MessageScroller`の`id`を渡します。自動追従はまだ行いません。`PromptInput`はsubmitのページ遷移を抑止する表示用フォームです。独自の送信処理やEnterキー送信は持ちません。
+`MessageScrollerButton`の`targetId`には、対応する`MessageScroller`の`id`を渡します。`autoScroll`を指定すると、末尾にいる間だけ内容の増加に追従します。`PromptInput`はsubmitのページ遷移を抑止するフォームです。独自の送信処理やEnterキー送信は持たず、送信動作は利用側で実装します。
 
 `PromptInputTextarea`は手動リサイズを無効にし、CSSの`field-sizing: content`で内容に合わせて高さを調整します。高さの初期範囲は76〜240pxで、上限を超えた内容のみ縦スクロールします。高さの自動調整には`field-sizing`対応ブラウザーが必要です。未対応ブラウザーでは`rows`に基づく高さでスクロールできます。サイズ制約は`mix`から変更できます。
 
@@ -92,10 +123,10 @@ Remixのスタイルは`rmx` cascade layerに入ります。レイヤー外の�
 
 ## Current limits
 
-- 表示専用です。`createChat()`・AI SDK・バックエンド・ストリーミングは未実装です。
+- 実モデル/provider・認証情報・永続化・resumeは未実装です。`/ai-sdk`は任意の`ai@7.0.142` peerを必要とし、表示用entrypointはAI SDKに依存しません。
 - MarkdownはGFMの基本構造に対応。HTMLは文字列として表示し、画像はaltテキストのみ、リンクはHTTP(S)／mailto／相対URLに制限します。コードはプレーン表示で、構文ハイライトや数式はありません。
 - コピーなどのブラウザー操作には、利用アプリ側のマウント／ハイドレーションが必要です。コピーはClipboard APIの利用可能なsecure contextで動作します。
-- 部品SSRの確認と、利用アプリのハイドレーション対応は別です。フルアプリのSSR経路・ストリーミング中の更新は次段階で検証します。
+- 部品SSRに加えて、隔離したtarball consumerでPlaygroundのSSR・型・asset graph・action testsを確認します。ブラウザーでのハイドレーションと描画確認は利用アプリ側で別途行ってください。
 - npm公開や本番利用の保証はまだ行いません。
 
 shadcn/uiのデザインを参考にしています。保存したライセンスと取得元は`LICENSES`を参照してください。
